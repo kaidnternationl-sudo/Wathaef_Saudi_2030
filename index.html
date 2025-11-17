@@ -1,20 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وظائف السعودية</title>
+    <title>وظائف السعودية 2030.كوم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* أنماط css العامة */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'segoe ui', tahoma, geneva, verdana, sans-serif;
         }
         
         body {
-            background-color: #f0f0f0;
+            background-color: #f5f5f5; /* لون خلفية أفتح */
             color: #333;
             line-height: 1.6;
         }
@@ -23,115 +24,163 @@
             max-width: 100%;
             margin: 0 auto;
             padding: 10px;
-            background: white;
-            min-height: 100vh;
         }
         
-        /* الهيدر */
-        .header {
-            background: linear-gradient(135deg, #2E7D32, #4CAF50);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 0 0 15px 15px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        
-        .header h1 {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-        
-        .header .subtitle {
+        /* شريط الحالة العلوي */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            background-color: #f0f0f0;
             font-size: 14px;
-            opacity: 0.9;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .status-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .status-icons i {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        /* الشعار - استعادة التصميم الأصلي */
+        .logo-container {
+            position: relative;
+            text-align: center;
+            padding: 15px 0;
+            background: linear-gradient(to bottom, #f5f5dc, #e8e8c9); /* خلفية بيج فاتح */
+            border: 2px solid #4c7836; /* إطار أخضر داكن */
+            margin: 5px 0;
+            border-radius: 5px; /* حواف مستديرة */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 18px;
+            color: #4c7836; /* لون أخضر داكن */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .palm-icon {
+            font-size: 20px;
+            position: relative;
+        }
+        
+        .vision-2030 {
+            font-size: 10px; /* حجم أصغر لرؤية 2030 */
+            color: #333;
+            position: absolute;
+            top: -8px; /* لتظهر فوق النخلة */
+            left: -2px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.8);
+            padding: 1px 3px;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         
         /* أشرطة التنقل */
-        .nav-container {
-            background: white;
-            padding: 10px 0;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .nav-row {
+        .nav-bar {
             display: flex;
             overflow-x: auto;
-            padding: 5px 0;
-            gap: 8px;
+            white-space: nowrap;
+            padding: 8px 0;
+            background-color: white;
+            border-bottom: 1px solid #ddd;
+            scrollbar-width: none;
+            margin-bottom: 5px; /* تباعد بين الشرائط */
         }
         
-        .nav-row::-webkit-scrollbar {
+        .nav-bar::-webkit-scrollbar {
             display: none;
         }
         
         .nav-item {
-            padding: 8px 15px;
-            background: #f5f5f5;
+            padding: 5px 10px;
+            margin: 0 3px;
+            background-color: #f0f0f0;
             border-radius: 20px;
-            font-size: 12px;
-            white-space: nowrap;
+            font-size: 11px; /* حجم خط أصغر */
             flex-shrink: 0;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
+            display: flex; /* لترتيب الأيقونة والنص */
+            align-items: center;
+            gap: 5px; /* مسافة بين الأيقونة والنص */
         }
         
         .nav-item.active {
-            background: #2E7D32;
+            background-color: #4c7836; /* أخضر داكن */
             color: white;
-            border-color: #2E7D32;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
-        .nav-item.hashtag {
-            background: #FF5722;
-            color: white;
-            border-color: #FF5722;
+        .nav-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
+        .nav-item i {
+            font-size: 13px; /* حجم الأيقونة */
+        }
+
         /* شريط البحث */
         .search-container {
-            background: white;
-            padding: 15px;
+            padding: 15px 10px;
+            background-color: white;
             margin-bottom: 10px;
-            border-radius: 10px;
+            border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
         .search-box {
             display: flex;
             border: 1px solid #ddd;
-            border-radius: 25px;
+            border-radius: 5px;
             overflow: hidden;
-            background: #f9f9f9;
+            background-color: #f9f9f9;
         }
         
         .search-input {
             flex: 1;
-            padding: 12px 15px;
+            padding: 12px;
             border: none;
             outline: none;
-            font-size: 14px;
+            font-size: 16px;
             text-align: right;
             background: transparent;
         }
         
         .search-btn {
-            background: #2E7D32;
+            background-color: #4c7836;
             color: white;
             border: none;
             padding: 0 20px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
         }
         
-        /* الإعلانات */
-        .ads-container {
-            background: white;
+        .search-btn:hover {
+            background-color: #3a5f2a;
+        }
+        
+        /* الإعلانات الثابتة */
+        .featured-ads {
+            background-color: white;
             padding: 15px;
             margin-bottom: 15px;
-            border-radius: 10px;
+            border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
@@ -141,6 +190,13 @@
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .ad-item:hover {
+            transform: translateX(5px);
+            color: #4c7836; /* لون أخضر عند التحويم */
         }
         
         .ad-item:last-child {
@@ -148,14 +204,21 @@
             border-bottom: none;
         }
         
-        .ad-bullet {
-            width: 8px;
-            height: 8px;
-            background: #2E7D32;
+        .green-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4c7836;
             border-radius: 50%;
             margin-left: 10px;
             margin-top: 5px;
             flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
         
         .ad-content {
@@ -164,94 +227,124 @@
         
         .ad-title {
             font-weight: bold;
-            margin-bottom: 3px;
-            font-size: 14px;
-            color: #222;
+            margin-bottom: 5px;
+            color: #2c3e50;
         }
         
         .ad-desc {
-            font-size: 12px;
+            font-size: 14px;
             color: #666;
         }
         
-        .ad-star {
-            color: #FFD700;
-            margin-left: 5px;
+        .star {
+            color: gold;
+            margin-right: 5px;
+            animation: spin 3s linear infinite;
         }
         
-        /* أزرار التواصل */
-        .social-container {
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* أزرار التواصل - استعادة التصميم الأصلي */
+        .social-buttons {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-            padding: 0 10px;
+            flex-wrap: wrap;
+            gap: 8px; /* تباعد بين الأزرار */
+            margin: 15px 0;
         }
         
         .social-btn {
             display: flex;
-            flex-direction: column;
             align-items: center;
             text-decoration: none;
             color: #333;
-            font-size: 12px;
+            font-size: 14px;
+            padding: 10px 12px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: calc(50% - 4px); /* لزرين في الصف مع الأخذ في الاعتبار الـ gap */
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
         }
         
         .social-icon {
-            width: 50px;
-            height: 50px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 5px;
-            font-size: 20px;
+            margin-left: 8px;
+            font-size: 14px;
             color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
         
-        .social-telegram {
-            background: #0088cc;
+        .telegram {
+            background-color: #0088cc;
         }
         
-        .social-whatsapp {
-            background: #25D366;
+        .whatsapp {
+            background-color: #25d366;
+        }
+        
+        .snapchat {
+            background-color: #fffc00;
+            color: #333;
         }
         
         /* نتائج البحث */
-        .results-container {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+        .results-header {
+            background-color: #8d0000; /* أحمر داكن */
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .results-header {
-            background: #D32F2F;
-            color: white;
-            padding: 12px 15px;
-            font-weight: bold;
-            font-size: 14px;
+        .results-count {
+            font-size: 12px;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 8px;
+            border-radius: 10px;
         }
         
         .job-card {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
+            background-color: white;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 3px solid transparent; /* شريط جانبي */
         }
         
-        .job-card:last-child {
-            border-bottom: none;
+        .job-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            border-right-color: #4c7836; /* لون الشريط عند التحويم */
         }
         
-        .job-badge {
+        .city-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #D32F2F;
+            top: 10px;
+            left: 10px;
+            background-color: #8d0000; /* أحمر داكن */
             color: white;
-            padding: 3px 8px;
+            padding: 2px 6px;
             border-radius: 3px;
             font-size: 10px;
             font-weight: bold;
@@ -260,319 +353,762 @@
         .job-title {
             font-weight: bold;
             margin-bottom: 5px;
-            font-size: 15px;
-            color: #222;
-            padding-left: 50px;
+            font-size: 16px;
+            padding-right: 0; /* يبدأ من اليمين */
+            color: #2c3e50;
+        }
+        
+        .job-company {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
         }
         
         .job-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
-            color: #666;
-            padding-left: 50px;
+            font-size: 12px;
+            color: #888;
         }
         
         .job-views {
             display: flex;
             align-items: center;
-            gap: 5px;
         }
         
         .views-bar {
-            width: 20px;
             height: 8px;
-            background: #2E7D32;
+            background-color: #4c7836;
+            margin-left: 5px;
             border-radius: 2px;
+            transition: width 0.5s ease;
         }
         
-        /* أزرار التصفية */
-        .filters-container {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
-        
-        .filter-title {
+        /* أزرار البحث المتقدم والرواتب */
+        .advanced-search {
+            background-color: #4c7836;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 5px;
             font-weight: bold;
-            margin-bottom: 10px;
-            color: #222;
-            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .advanced-search:hover {
+            background-color: #3a5f2a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         
         .salary-filters {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 15px;
+            margin: 15px 0;
         }
         
         .salary-btn {
             padding: 8px 12px;
-            background: #2E7D32;
+            background-color: #4c7836;
             color: white;
             border: none;
             border-radius: 5px;
-            font-size: 12px;
+            font-size: 13px;
             flex: 1;
             min-width: 70px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .salary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
         }
         
         .salary-btn.blue {
-            background: #1976D2;
+            background-color: #1e6ea7; /* أزرق داكن */
+        }
+        
+        .salary-btn.blue:hover {
+            background-color: #1a5a8a;
         }
         
         .snap-filters {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin: 15px 0;
         }
         
         .snap-btn {
             padding: 8px 12px;
-            background: #D32F2F;
+            background-color: #8d0000; /* أحمر داكن */
             color: white;
             border: none;
             border-radius: 5px;
-            font-size: 12px;
+            font-size: 13px;
             flex: 1;
-            min-width: 120px;
+            min-width: 110px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
-        /* زر البحث المتقدم */
-        .advanced-search {
-            background: #2E7D32;
+        .snap-btn:hover {
+            background-color: #6a0000;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+        
+        /* صفحة الإعلان الفردي */
+        .job-post {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none; /* مخفية افتراضيا */
+        }
+        
+        .job-post.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .job-post-header {
+            color: #8d0000;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .job-meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .publish-date {
+            background-color: #ffd700; /* أصفر */
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .job-content {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin: 15px 0 10px;
+            color: #4c7836;
+            font-size: 16px;
+            border-right: 3px solid #4c7836;
+            padding-right: 10px;
+        }
+        
+        .bullet-list {
+            padding-right: 20px;
+            margin-bottom: 15px;
+            list-style: none; /* إزالة النقطة الافتراضية */
+        }
+        
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-right: 15px;
+        }
+        
+        .bullet-list li:before {
+            content: "•"; /* إضافة نقطة مخصصة */
+            color: #4c7836;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        
+        .apply-btn {
+            background-color: #4c7836;
             color: white;
             text-align: center;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 5px;
             font-weight: bold;
-            margin: 15px 0;
+            margin-top: 20px;
             cursor: pointer;
+            transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: block; /* لجعل الزر يأخذ العرض الكامل */
+            text-decoration: none;
         }
         
-        /* التجاوب مع الجوال */
+        .apply-btn:hover {
+            background-color: #3a5f2a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* نموذج الاتصال */
+        .contact-form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none; /* مخفية افتراضيا */
+        }
+        
+        .contact-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .form-title {
+            color: #4c7836;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #4c7836;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #4c7836;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 120, 54, 0.3);
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            min-height: 120px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-textarea:focus {
+            border-color: #4c7836;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 120, 54, 0.3);
+        }
+        
+        .submit-btn {
+            background-color: #4c7836;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3a5f2a;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .form-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+            font-weight: bold;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* زر العودة */
+        .back-btn {
+            background-color: #8d0000; /* أحمر داكن */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #6a0000;
+            transform: translateX(-3px);
+        }
+        
+        /* مؤشر التحميل */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #4c7836;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4c7836;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        /* تحسينات للجوال */
         @media (max-width: 768px) {
             .nav-item {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+            .nav-item i {
                 font-size: 11px;
-                padding: 6px 12px;
             }
-            
+            .social-btn {
+                min-width: 100%; /* زر واحد في الصف على الشاشات الصغيرة */
+            }
             .salary-btn, .snap-btn {
-                min-width: calc(50% - 8px);
+                min-width: calc(50% - 4px); /* زرين في الصف */
             }
-        }
-        
-        /* تأثيرات التفاعل */
-        .nav-item:hover, .salary-btn:hover, .snap-btn:hover, .advanced-search:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-        }
-        
-        .social-btn:hover .social-icon {
-            transform: scale(1.1);
-        }
-        
-        .job-card:hover {
-            background: #f9f9f9;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- الهيدر -->
-        <div class="header">
-            <h1>وظائف السعودية</h1>
-            <div class="subtitle">البحث عن الوظائف الحكومية والخاصة</div>
-        </div>
-        
-        <!-- أشرطة التنقل - النوع -->
-        <div class="nav-container">
-            <div class="nav-row">
-                <div class="nav-item active">وظائف حكومية</div>
-                <div class="nav-item">نسائية</div>
-                <div class="nav-item">عن بعد</div>
-                <div class="nav-item">تدريب منتهي بالتوظيف</div>
+        <div class="status-bar">
+            <div class="status-icons">
+                <i class="fas fa-shield-alt"></i>
+                <i class="fas fa-wifi"></i>
+            </div>
+            <div>بحث متقدم</div>
+            <div class="status-icons">
+                <i class="fas fa-sync-alt" id="refreshBtn"></i>
             </div>
         </div>
         
-        <!-- أشرطة التنقل - المدن -->
-        <div class="nav-container">
-            <div class="nav-row">
-                <div class="nav-item hashtag">#الرياض</div>
-                <div class="nav-item hashtag">#جدة</div>
-                <div class="nav-item hashtag">#الشرقية</div>
-                <div class="nav-item hashtag">#مكة</div>
-                <div class="nav-item hashtag">#المدينة</div>
-                <div class="nav-item hashtag">#جازان</div>
+        <div class="logo-container">
+            <div class="logo">
+                <span class="palm-icon">
+                    🌴
+                    <span class="vision-2030">2030</span>
+                </span>
+                وظائف السعودية 2030.كوم
             </div>
         </div>
         
-        <!-- شريط البحث -->
+        <div class="nav-bar">
+            <div class="nav-item active" data-filter="type" data-value="حكومي"><i class="fas fa-building"></i> وظائف حكومية</div>
+            <div class="nav-item" data-filter="type" data-value="نسائي"><i class="fas fa-female"></i> نسائية</div>
+            <div class="nav-item" data-filter="type" data-value="عن بعد"><i class="fas fa-laptop-code"></i> عن بعد</div>
+            <div class="nav-item" data-filter="type" data-value="تدريب"><i class="fas fa-chalkboard-teacher"></i> تدريب منتهي بالتوظيف</div>
+        </div>
+        
+        <div class="nav-bar">
+            <div class="nav-item" data-filter="city" data-value="الرياض"><i class="fas fa-city"></i> الرياض</div>
+            <div class="nav-item" data-filter="city" data-value="جدة"><i class="fas fa-city"></i> جدة</div>
+            <div class="nav-item" data-filter="city" data-value="الشرقية"><i class="fas fa-city"></i> الشرقية</div>
+            <div class="nav-item" data-filter="city" data-value="مكة"><i class="fas fa-city"></i> مكة</div>
+            <div class="nav-item" data-filter="city" data-value="المدينة"><i class="fas fa-city"></i> المدينة</div>
+            <div class="nav-item" data-filter="city" data-value="جازان"><i class="fas fa-city"></i> جازان</div>
+        </div>
+        
+        <div class="nav-bar">
+            <div class="nav-item" data-filter="qualification" data-value="بكالوريوس"><i class="fas fa-user-graduate"></i> وظائف بكالوريوس</div>
+            <div class="nav-item" data-filter="qualification" data-value="دبلوم"><i class="fas fa-certificate"></i> وظائف دبلوم</div>
+            <div class="nav-item" data-filter="qualification" data-value="ثانوي"><i class="fas fa-school"></i> وظائف ثانوي</div>
+            <div class="nav-item" data-filter="type" data-value="جزئي"><i class="fas fa-hourglass-half"></i> دوام جزئي</div>
+            <div class="nav-item" data-filter="type" data-value="كامل"><i class="fas fa-clock"></i> دوام كامل</div>
+            <div class="nav-item" data-filter="type" data-value="دورات"><i class="fas fa-lightbulb"></i> دورات تدريبية</div>
+        </div>
+        
         <div class="search-container">
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="ادخل كلمات البحث هنا ...">
-                <button class="search-btn">
+                <input type="text" class="search-input" id="searchInput" placeholder="ادخل كلمات البحث هنا ...">
+                <button class="search-btn" id="searchBtn">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
         </div>
         
-        <!-- الإعلانات -->
-        <div class="ads-container">
-            <div class="ad-item">
-                <div class="ad-bullet"></div>
+        <div class="featured-ads">
+            <div class="ad-item" data-ad="1">
+                <div class="green-dot"></div>
                 <div class="ad-content">
                     <div class="ad-title">شركة ثمانية تعلن عن طرح 30 وظيفة تشمل وظائف عن بعد للرجال والنساء</div>
                 </div>
             </div>
             
-            <div class="ad-item">
-                <div class="ad-bullet"></div>
+            <div class="ad-item" data-ad="2">
+                <div class="green-dot"></div>
                 <div class="ad-content">
                     <div class="ad-title">وزارة النقل والخدمات اللوجستية تعلن عن فتح باب التوظيف للرجال والنساء</div>
                 </div>
             </div>
             
-            <div class="ad-item">
-                <div class="ad-bullet"></div>
+            <div class="ad-item" data-ad="3">
+                <div class="green-dot"></div>
                 <div class="ad-content">
                     <div class="ad-title">الأكاديمية السعودية للتجزئة تعلن عن برامج دبلوم بتوظيف فوري ومكافأة شهرية (ثانوية فأعلى)</div>
                 </div>
             </div>
             
-            <div class="ad-item">
-                <div class="ad-bullet"></div>
+            <div class="ad-item" data-ad="4">
+                <div class="green-dot"></div>
                 <div class="ad-content">
-                    <div class="ad-title"><span class="ad-star">★</span> دورات مجانية (عن بعد) مع شهادات</div>
+                    <div class="ad-title"><span class="star">★</span> دورات مجانية (عن بعد) مع شهادات</div>
                 </div>
             </div>
         </div>
         
-        <!-- أزرار التواصل -->
-        <div class="social-container">
-            <a href="#" class="social-btn">
-                <div class="social-icon social-telegram">
+        <div class="social-buttons">
+            <a href="https://t.me/saudijobs" class="social-btn" target="_blank">
+                <div class="social-icon telegram">
                     <i class="fab fa-telegram-plane"></i>
                 </div>
                 <span>تيليجرام وظائف</span>
             </a>
             
-            <a href="#" class="social-btn">
-                <div class="social-icon social-whatsapp">
+            <a href="https://wa.me/966500000000" class="social-btn" target="_blank">
+                <div class="social-icon whatsapp">
                     <i class="fab fa-whatsapp"></i>
                 </div>
                 <span>واتساب وظائف</span>
             </a>
+            
+            <a href="#" class="social-btn" id="contactBtn">
+                <div class="social-icon snapchat">
+                    <i class="fab fa-snapchat-ghost"></i>
+                </div>
+                <span>اتصل بنا</span>
+            </a>
+            
+            <a href="#" class="social-btn" id="extraBtn">
+                <div class="social-icon" style="background-color: #3b5998;">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <span>شارك الموقع</span>
+            </a>
         </div>
         
-        <!-- نتائج البحث -->
-        <div class="results-container">
-            <div class="results-header">1 نتيجة بحث عن شركة ترتبيك</div>
+        <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            <div>جاري تحميل الوظائف...</div>
+        </div>
+        
+        <div id="searchResults">
+            <div class="results-header">
+                <span>نتائج البحث</span>
+                <span class="results-count" id="resultsCount">1 نتيجة</span>
+            </div>
             
-            <div class="job-card">
-                <div class="job-badge">جدة</div>
+            <div class="job-card" data-job="1">
+                <div class="city-badge">جدة</div>
                 <div class="job-title">وظائف عن بعد في إدارة المحتوى شاغرة في شركة ترتبيك</div>
+                <div class="job-company">شركة ترتبيك للتسويق الرقمي</div>
                 <div class="job-meta">
-                    <div>22:23، 6/11/2025</div>
+                    <div id="currentTime">22:23، 6/11/2025</div>
                     <div class="job-views">
-                        2700 <div class="views-bar"></div>
+                        2700 <div class="views-bar" style="width: 70%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="job-card" data-job="2">
+                <div class="city-badge">الرياض</div>
+                <div class="job-title">وظائف إدارية شاغرة في هيئة الزكاة والضريبة والجمارك (لجميع التخصصات)</div>
+                <div class="job-company">هيئة الزكاة والضريبة والجمارك</div>
+                <div class="job-meta">
+                    <div id="currentTime2">22:23، 6/11/2025</div>
+                    <div class="job-views">
+                        1200 <div class="views-bar" style="width: 40%;"></div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- زر البحث المتقدم -->
-        <div class="advanced-search">
+        <div class="advanced-search" id="advancedSearchBtn">
             البحث المتقدم
         </div>
         
-        <!-- تصفية الرواتب -->
-        <div class="filters-container">
-            <div class="filter-title">بحث حسب الراتب</div>
-            <div class="salary-filters">
-                <button class="salary-btn blue">4000 راتب</button>
-                <button class="salary-btn blue">5000 راتب</button>
-                <button class="salary-btn">9000 راتب</button>
-                <button class="salary-btn">10000 راتب</button>
-            </div>
+        <div class="salary-filters">
+            <button class="salary-btn blue" data-salary="4000">4000 راتب</button>
+            <button class="salary-btn blue" data-salary="5000">5000 راتب</button>
+            <button class="salary-btn" data-salary="9000">9000 راتب</button>
+            <button class="salary-btn" data-salary="10000">10000 راتب</button>
         </div>
         
-        <!-- تصفية سناب شات -->
-        <div class="filters-container">
-            <div class="filter-title">سناب شات</div>
-            <div class="snap-filters">
-                <button class="snap-btn">سناب وظائف نسائية</button>
-                <button class="snap-btn">سناب وظائف عن بعد</button>
-                <button class="snap-btn">سناب وظائف الرياض</button>
-                <button class="snap-btn">سناب وظائف عسير</button>
+        <div class="snap-filters">
+            <button class="snap-btn" data-filter="type" data-value="نسائي">سناب وظائف نسائية</button>
+            <button class="snap-btn" data-filter="type" data-value="عن بعد">سناب وظائف عن بعد</button>
+            <button class="snap-btn" data-filter="city" data-value="الرياض">سناب وظائف الرياض</button>
+            <button class="snap-btn" data-filter="city" data-value="عسير">سناب وظائف عسير</button>
+        </div>
+        
+        <div class="job-post" id="jobPost">
+            <button class="back-btn" id="backToResults">
+                <i class="fas fa-arrow-right"></i> العودة للنتائج
+            </button>
+            
+            <div class="job-post-header">وظائف عن بعد في إدارة المحتوى شاغرة في شركة ترتبيك</div>
+            
+            <div class="job-meta-info">
+                <div>بواسطة: وظائف السعودية 24</div>
+                <div class="publish-date" id="postDate">17-11-2025</div>
             </div>
+            
+            <div class="job-tags">
+                <div class="tag">#السعودية</div>
+                <div class="tag">#شركة_ثمانية</div>
+                <div class="tag">#وظائف_عن_بعد</div>
+                <div class="tag">#ادارة_المحتوى</div>
+            </div>
+            
+            <div class="job-content">
+                <div class="section-title">المسميات الوظيفية:</div>
+                <ul class="bullet-list">
+                    <li>مدير محتوى</li>
+                    <li>كاتب محتوى</li>
+                    <li>محرر فيديو</li>
+                    <li>مصمم جرافيك</li>
+                    <li>مسؤول وسائل تواصل اجتماعي</li>
+                </ul>
+                
+                <div class="section-title">نبذة عن الشركة:</div>
+                <p>شركة رائدة في مجال التسويق الرقمي وإدارة المحتوى، تأسست عام 2018 ولها حضور قوي في السوق السعودي. نتميز بتقديم حلول مبتكرة في مجال التسويق الإلكتروني وإدارة المحتوى.</p>
+                
+                <div class="section-title">متطلبات الوظيفة:</div>
+                <ul class="bullet-list">
+                    <li>خبرة لا تقل عن سنتين في مجال إدارة المحتوى</li>
+                    <li>إجادة اللغة العربية والإنجليزية</li>
+                    <li>القدرة على العمل ضمن فريق</li>
+                    <li>الإلمام بمنصات التواصل الاجتماعي</li>
+                </ul>
+                
+                <div class="section-title">مميزات العمل في الشركة:</div>
+                <ul class="bullet-list">
+                    <li>رواتب تنافسية تبدأ من 9000 ريال</li>
+                    <li>تأمين طبي شامل</li>
+                    <li>بيئة عمل مرنة عن بعد</li>
+                    <li>فرص للتطور الوظيفي</li>
+                    <li>تدريب مستمر وتطوير مهارات</li>
+                </ul>
+            </div>
+            
+            <a href="https://example.com/apply" class="apply-btn" target="_blank">التقديم من هنا</a>
+        </div>
+        
+        <div class="contact-form" id="contactForm">
+            <div class="form-title">تواصل معنا</div>
+            <form id="contactFormElement">
+                <div class="form-group">
+                    <label class="form-label" for="name">الاسم الكامل</label>
+                    <input type="text" id="name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="message">الرسالة</label>
+                    <textarea id="message" class="form-textarea" placeholder="اكتب رسالتك هنا..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">إرسال الرسالة</button>
+                
+                <div class="form-message" id="formMessage"></div>
+            </form>
         </div>
     </div>
 
     <script>
-        // نظام البحث والتصفية المتكامل
+        // كود JavaScript كامل للوظائف
         document.addEventListener('DOMContentLoaded', function() {
             // عناصر DOM
             const navItems = document.querySelectorAll('.nav-item');
             const salaryButtons = document.querySelectorAll('.salary-btn');
             const snapButtons = document.querySelectorAll('.snap-btn');
-            const searchBtn = document.querySelector('.search-btn');
-            const searchInput = document.querySelector('.search-input');
-            const advancedSearch = document.querySelector('.advanced-search');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchInput = document.getElementById('searchInput');
+            const advancedSearchBtn = document.getElementById('advancedSearchBtn');
+            const contactBtn = document.getElementById('contactBtn');
+            const backToResults = document.getElementById('backToResults');
+            const jobPost = document.getElementById('jobPost');
+            const contactForm = document.getElementById('contactForm');
+            const contactFormElement = document.getElementById('contactFormElement');
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const resultsCount = document.getElementById('resultsCount');
+            const jobTimeElements = document.querySelectorAll('[id^="currentTime"]');
+            const postDateElement = document.getElementById('postDate');
+            const adItems = document.querySelectorAll('.ad-item');
             const jobCards = document.querySelectorAll('.job-card');
             
             // تحديث الوقت الحالي
-            function updateTime() {
+            function updateCurrentTime() {
                 const now = new Date();
-                const timeElements = document.querySelectorAll('.job-meta div:first-child');
-                timeElements.forEach(el => {
-                    el.textContent = `${now.toLocaleTimeString('ar-SA', { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                    })}، ${now.toLocaleDateString('ar-SA')}`;
+                const timeString = now.toLocaleTimeString('ar-SA', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true 
                 });
+                const dateString = now.toLocaleDateString('ar-SA');
+
+                jobTimeElements.forEach(el => {
+                    el.textContent = `${timeString}، ${dateString}`;
+                });
+                
+                if (postDateElement) {
+                    postDateElement.textContent = dateString;
+                }
             }
             
             // تحديث الوقت كل دقيقة
-            updateTime();
-            setInterval(updateTime, 60000);
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 60000);
             
-            // نظام التصفية
+            // وظيفة المحاكاة للتصفية
+            function simulateFiltering(type, value) {
+                showLoading();
+                setTimeout(() => {
+                    hideLoading();
+                    resultsCount.textContent = `${Math.floor(Math.random() * 30) + 5} نتيجة`;
+                    // في التطبيق الحقيقي، هنا سيتم تطبيق التصفية الفعلية
+                }, 1000);
+            }
+
+            // إضافة تأثير النقر على عناصر التنقل
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
+                    const filterType = this.getAttribute('data-filter');
+                    const filterValue = this.getAttribute('data-value');
+                    
                     // إزالة النشاط من جميع العناصر
                     navItems.forEach(nav => nav.classList.remove('active'));
                     // إضافة النشاط للعنصر المحدد
                     this.classList.add('active');
                     
-                    // محاكاة التصفية
-                    simulateFilter(this.textContent);
+                    simulateFiltering(filterType, filterValue);
                 });
             });
             
-            // تصفية الرواتب
+            // إضافة تأثير النقر على أزرار الرواتب
             salaryButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const salary = this.textContent;
-                    simulateSalaryFilter(salary);
+                    const salary = this.getAttribute('data-salary');
+                    
+                    salaryButtons.forEach(btn => btn.style.opacity = '1');
+                    this.style.opacity = '0.7';
+                    
+                    simulateFiltering('salary', salary);
                 });
             });
             
-            // تصفية السناب
+            // إضافة تأثير النقر على أزرار سناب شات
             snapButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const filter = this.textContent;
-                    simulateSnapFilter(filter);
+                    const filterType = this.getAttribute('data-filter');
+                    const filterValue = this.getAttribute('data-value');
+                    
+                    snapButtons.forEach(btn => btn.style.opacity = '1');
+                    this.style.opacity = '0.7';
+                    
+                    simulateFiltering(filterType, filterValue);
                 });
             });
             
-            // نظام البحث
+            // البحث
             searchBtn.addEventListener('click', performSearch);
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
@@ -583,59 +1119,109 @@
             function performSearch() {
                 const query = searchInput.value.trim();
                 if (query) {
-                    // محاكاة البحث
-                    const resultsHeader = document.querySelector('.results-header');
-                    resultsHeader.textContent = `${Math.floor(Math.random() * 50) + 1} نتيجة بحث عن "${query}"`;
-                    
-                    // تأثير البحث
-                    searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    showLoading();
                     setTimeout(() => {
-                        searchBtn.innerHTML = '<i class="fas fa-search"></i>';
-                    }, 1000);
+                        hideLoading();
+                        resultsCount.textContent = `${Math.floor(Math.random() * 50) + 1} نتيجة`;
+                        // في التطبيق الحقيقي، هنا سيتم جلب النتائج من الخادم
+                    }, 1500);
                 }
             }
             
             // البحث المتقدم
-            advancedSearch.addEventListener('click', function() {
+            advancedSearchBtn.addEventListener('click', function() {
                 alert('سيتم فتح نافذة البحث المتقدم قريباً');
-                // يمكن استبدال هذا بنافذة البحث المتقدم الفعلية
             });
             
-            // تفاصيل الوظيفة
+            // تبديل العرض بين الصفحة الرئيسية ونموذج الاتصال وتفاصيل الوظيفة
+            function toggleMainDisplay(show) {
+                document.getElementById('searchResults').style.display = show ? 'block' : 'none';
+                document.querySelector('.advanced-search').style.display = show ? 'block' : 'none';
+                document.querySelector('.salary-filters').style.display = show ? 'flex' : 'none';
+                document.querySelector('.snap-filters').style.display = show ? 'flex' : 'none';
+                contactForm.classList.remove('active');
+                jobPost.classList.remove('active');
+            }
+
+            // الاتصال بنا
+            contactBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleMainDisplay(false);
+                contactForm.classList.add('active');
+            });
+            
+            // العودة للنتائج (من نموذج الاتصال أو تفاصيل الوظيفة)
+            backToResults.addEventListener('click', function() {
+                toggleMainDisplay(true);
+            });
+            
+            // عرض تفاصيل الوظيفة
             jobCards.forEach(card => {
                 card.addEventListener('click', function() {
-                    alert('سيتم فتح تفاصيل الوظيفة قريباً');
-                    // يمكن استبدال هذا بصفحة تفاصيل الوظيفة
+                    toggleMainDisplay(false);
+                    jobPost.classList.add('active');
                 });
             });
             
-            // وظائف المحاكاة
-            function simulateFilter(filter) {
-                console.log('تم تطبيق التصفية:', filter);
-                // في التطبيق الحقيقي، هنا سيتم إرسال طلب إلى الخادم
-            }
-            
-            function simulateSalaryFilter(salary) {
-                console.log('تم تطبيق تصفية الراتب:', salary);
-                // في التطبيق الحقيقي، هنا سيتم إرسال طلب إلى الخادم
-            }
-            
-            function simulateSnapFilter(filter) {
-                console.log('تم تطبيق تصفية السناب:', filter);
-                // في التطبيق الحقيقي، هنا سيتم إرسال طلب إلى الخادم
-            }
-            
-            // تأثيرات بصرية إضافية
-            const socialIcons = document.querySelectorAll('.social-icon');
-            socialIcons.forEach(icon => {
-                icon.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.1)';
+            // عرض تفاصيل الإعلان (Ad Item)
+            adItems.forEach(ad => {
+                ad.addEventListener('click', function() {
+                    const adId = this.getAttribute('data-ad');
+                    alert(`سيتم فتح تفاصيل الإعلان رقم ${adId}`);
                 });
+            });
+            
+            // تحديث الصفحة (محاكاة)
+            refreshBtn.addEventListener('click', function() {
+                showLoading();
+                setTimeout(() => {
+                    hideLoading();
+                    updateCurrentTime();
+                    resultsCount.textContent = `${Math.floor(Math.random() * 50) + 1} نتيجة`;
+                    alert('تم تحديث الوظائف بنجاح!');
+                }, 2000);
+            });
+            
+            // إرسال نموذج الاتصال (محاكاة)
+            contactFormElement.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                icon.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                });
+                // تعطيل زر الإرسال
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'جاري الإرسال...';
+                
+                // محاكاة إرسال البيانات
+                setTimeout(() => {
+                    // إظهار رسالة النجاح
+                    formMessage.textContent = 'تم إرسال رسالتك بنجاح! سيتم الرد عليك في أقرب وقت.';
+                    formMessage.className = 'form-message success';
+                    formMessage.style.display = 'block';
+                    
+                    // إعادة تعيين النموذج
+                    contactFormElement.reset();
+                    
+                    // إعادة تمكين زر الإرسال
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'إرسال الرسالة';
+                    
+                    // إخفاء الرسالة بعد 5 ثوانٍ
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                        toggleMainDisplay(true); // العودة للصفحة الرئيسية
+                    }, 5000);
+                }, 2000);
             });
+            
+            // وظائف المساعدة للتحميل
+            function showLoading() {
+                loadingIndicator.classList.add('active');
+                document.getElementById('searchResults').style.opacity = '0.5';
+            }
+            
+            function hideLoading() {
+                loadingIndicator.classList.remove('active');
+                document.getElementById('searchResults').style.opacity = '1';
+            }
         });
     </script>
 </body>
