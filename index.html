@@ -366,7 +366,7 @@
             color: #555;
         }
         
-        .form-input, .form-textarea {
+        .form-input, .form-textarea, .form-select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -413,32 +413,33 @@
             border: 1px solid #f5c6cb;
         }
         
-        .loading {
-            display: none;
-            text-align: center;
+        .file-upload {
+            border: 2px dashed #ddd;
+            border-radius: 5px;
             padding: 20px;
-            color: #4c7836;
+            text-align: center;
+            margin-bottom: 10px;
+            cursor: pointer;
         }
         
-        .active {
-            display: block;
+        .file-upload:hover {
+            border-color: #4c7836;
         }
         
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #4c7836;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+        .file-list {
+            margin-top: 10px;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: #f9f9f9;
+            border-radius: 3px;
+            margin-bottom: 5px;
         }
-
+        
         .search-results-page {
             display: none;
         }
@@ -454,6 +455,15 @@
             margin-bottom: 15px;
             font-size: 14px;
         }
+        
+        .city-stats {
+            background: #f0f8f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -465,7 +475,7 @@
                     <i class="fas fa-shield-alt"></i>
                     <i class="fas fa-wifi"></i>
                 </div>
-                <div>بحث متقدم</div>
+                <div>وظائف السعودية</div>
                 <div class="status-icons">
                     <i class="fas fa-sync-alt" id="refreshBtn"></i>
                 </div>
@@ -487,9 +497,6 @@
                 <div class="nav-item" data-filter="city" data-value="الدمام"><i class="fas fa-city"></i> الدمام</div>
                 <div class="nav-item" data-filter="city" data-value="الخبر"><i class="fas fa-city"></i> الخبر</div>
                 <div class="nav-item" data-filter="city" data-value="الأحساء"><i class="fas fa-city"></i> الأحساء</div>
-                <div class="nav-item" data-filter="city" data-value="الطائف"><i class="fas fa-city"></i> الطائف</div>
-                <div class="nav-item" data-filter="city" data-value="بريدة"><i class="fas fa-city"></i> بريدة</div>
-                <div class="nav-item" data-filter="city" data-value="تبوك"><i class="fas fa-city"></i> تبوك</div>
             </div>
             
             <!-- شريط التخصصات -->
@@ -502,15 +509,6 @@
                 <div class="nav-item" data-filter="category" data-value="هندسية"><i class="fas fa-hard-hat"></i> هندسية</div>
             </div>
             
-            <!-- شريط المؤهلات -->
-            <div class="nav-bar">
-                <div class="nav-item" data-filter="qualification" data-value="بكالوريوس"><i class="fas fa-user-graduate"></i> بكالوريوس</div>
-                <div class="nav-item" data-filter="qualification" data-value="دبلوم"><i class="fas fa-certificate"></i> دبلوم</div>
-                <div class="nav-item" data-filter="qualification" data-value="ثانوي"><i class="fas fa-school"></i> ثانوي</div>
-                <div class="nav-item" data-filter="type" data-value="دوام جزئي"><i class="fas fa-hourglass-half"></i> دوام جزئي</div>
-                <div class="nav-item" data-filter="type" data-value="دوام كامل"><i class="fas fa-clock"></i> دوام كامل</div>
-            </div>
-            
             <div class="search-container">
                 <div class="search-box">
                     <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن وظيفة، تخصص، شركة...">
@@ -521,17 +519,10 @@
             </div>
             
             <div class="featured-ads">
-                <div class="ad-item" data-ad="1">
+                <div class="ad-item">
                     <div class="green-dot"></div>
                     <div class="ad-content">
                         <div class="ad-title">أكثر من 5000 وظيفة شاغرة في مختلف التخصصات</div>
-                    </div>
-                </div>
-                
-                <div class="ad-item" data-ad="2">
-                    <div class="green-dot"></div>
-                    <div class="ad-content">
-                        <div class="ad-title">القطاع الصحي يعلن عن 1200 وظيفة طبية وإدارية</div>
                     </div>
                 </div>
             </div>
@@ -552,17 +543,6 @@
                 <button class="salary-btn" data-salary="10000">10000 راتب</button>
             </div>
             
-            <div class="snap-filters">
-                <button class="snap-btn" data-filter="category" data-value="طبية">وظائف طبية</button>
-                <button class="snap-btn" data-filter="category" data-value="تقنية">وظائف تقنية</button>
-                <button class="snap-btn" data-filter="category" data-value="إدارية">وظائف إدارية</button>
-            </div>
-            
-            <div class="loading" id="loadingIndicator">
-                <div class="spinner"></div>
-                <div>جاري تحميل الوظائف...</div>
-            </div>
-            
             <div id="searchResults">
                 <div class="results-header">
                     <span>أحدث الوظائف</span>
@@ -580,6 +560,10 @@
             
             <div class="filters-summary" id="filtersSummary">
                 عرض جميع الوظائف
+            </div>
+            
+            <div class="city-stats" id="cityStats" style="display: none;">
+                <!-- إحصائيات المدينة -->
             </div>
             
             <div id="filteredResults">
@@ -623,28 +607,79 @@
                 <input type="hidden" name="company_name" id="hiddenCompanyName">
                 
                 <div class="form-group">
-                    <label class="form-label" for="full_name">الاسم الكامل</label>
+                    <label class="form-label" for="full_name">الاسم الكامل *</label>
                     <input type="text" id="full_name" name="full_name" class="form-input" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="email">البريد الإلكتروني</label>
+                    <label class="form-label" for="email">البريد الإلكتروني *</label>
                     <input type="email" id="email" name="email" class="form-input" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="phone">رقم الهاتف</label>
+                    <label class="form-label" for="phone">رقم الهاتف *</label>
                     <input type="tel" id="phone" name="phone" class="form-input" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="education">المؤهل العلمي</label>
-                    <input type="text" id="education" name="education" class="form-input" required>
+                    <label class="form-label" for="national_id">رقم الهوية/الإقامة *</label>
+                    <input type="text" id="national_id" name="national_id" class="form-input" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="experience">سنوات الخبرة</label>
-                    <input type="number" id="experience" name="experience" class="form-input" required>
+                    <label class="form-label" for="education">المؤهل العلمي *</label>
+                    <select id="education" name="education" class="form-select" required>
+                        <option value="">اختر المؤهل العلمي</option>
+                        <option value="ثانوي">ثانوي</option>
+                        <option value="دبلوم">دبلوم</option>
+                        <option value="بكالوريوس">بكالوريوس</option>
+                        <option value="ماجستير">ماجستير</option>
+                        <option value="دكتوراه">دكتوراه</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="experience">سنوات الخبرة *</label>
+                    <select id="experience" name="experience" class="form-select" required>
+                        <option value="">اختر سنوات الخبرة</option>
+                        <option value="لا توجد خبرة">لا توجد خبرة</option>
+                        <option value="أقل من سنة">أقل من سنة</option>
+                        <option value="1-3 سنوات">1-3 سنوات</option>
+                        <option value="3-5 سنوات">3-5 سنوات</option>
+                        <option value="أكثر من 5 سنوات">أكثر من 5 سنوات</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">صورة الهوية الشخصية *</label>
+                    <div class="file-upload" onclick="document.getElementById('idPhoto').click()">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <div>انقر لرفع صورة الهوية/الإقامة</div>
+                        <small>PNG, JPG - الحد الأقصى 5MB</small>
+                    </div>
+                    <input type="file" id="idPhoto" name="id_photo" accept=".jpg,.jpeg,.png" style="display: none;" required>
+                    <div class="file-list" id="idPhotoList"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">شهادة التخرج *</label>
+                    <div class="file-upload" onclick="document.getElementById('certificate').click()">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <div>انقر لرفع شهادة التخرج</div>
+                        <small>PDF, PNG, JPG - الحد الأقصى 5MB</small>
+                    </div>
+                    <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" required>
+                    <div class="file-list" id="certificateList"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="certificates_and_docs">الوثائق والشهادات الإضافية</label>
+                    <textarea id="certificates_and_docs" name="certificates_and_docs" class="form-textarea" placeholder="اذكر الشهادات والوثائق الإضافية التي تمتلكها..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="message">رسالة التغطية</label>
+                    <textarea id="message" name="message" class="form-textarea" placeholder="اكتب رسالة تغطية تشرح فيها أسباب اهتمامك بالوظيفة..."></textarea>
                 </div>
                 
                 <button type="submit" class="submit-btn">إرسال الطلب</button>
@@ -655,410 +690,39 @@
     </div>
 
     <script>
-        // قاعدة بيانات شاملة للوظائف
+        // 🔑 🔑 🔑 مفاتيح EmailJS الصحيحة
+        (function() {
+            emailjs.init("PG83urRbb2ZKOmJvdh");
+        })();
+
+        // قاعدة بيانات الوظائف
         const jobDatabase = {
             companies: [
                 "أرامكو السعودية", "سابك", "الاتصالات السعودية", "الراجحي", "البنك الأهلي",
-                "الرياض المالية", "التعاونية", "زين السعودية", "STC", "موبايلي",
-                "المجموعة السعودية", "دار الأركان", "المراعي", "صافولا", "نادك",
-                "أسمنت العربية", "الكابلات", "أنابيب", "بترو رابغ", "كيمانول",
-                "المتقدمة", "أكوا باور", "العقارية", "تعمير", "إعمار",
-                "دلة الصحية", "المستشفى السعودي الألماني", "مستشفى الملك فيصل", "مستشفى القوات المسلحة"
+                "الرياض المالية", "التعاونية", "زين السعودية", "STC", "موبايلي"
             ],
             
-            cities: [
-                "الرياض", "جدة", "مكة", "المدينة", "الدمام", 
-                "الخبر", "الأحساء", "الطائف", "بريدة", "تبوك",
-                "جازان", "نجران", "حائل", "الباحة", "عرعر",
-                "سكاكا", "أبها", "القصيم", "الشرقية", "عسير"
-            ],
+            cities: {
+                "الرياض": 1250,
+                "جدة": 980,
+                "مكة": 650,
+                "المدينة": 520,
+                "الدمام": 780,
+                "الخبر": 450,
+                "الأحساء": 320
+            },
             
             jobs: [
-                // وظائف تقنية
-                { title: "مبرمج تطبيقات", category: "تقنية", salary: 9000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مطور ويب", category: "تقنية", salary: 8500, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس برمجيات", category: "تقنية", salary: 12000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس شبكات", category: "تقنية", salary: 11000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "أخصائي أمن سيبراني", category: "تقنية", salary: 13000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مدير قواعد بيانات", category: "تقنية", salary: 15000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مصمم واجهات مستخدم", category: "تقنية", salary: 8000, qualification: "دبلوم", type: "دوام كامل" },
-                { title: "مهندس DevOps", category: "تقنية", salary: 14000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مطور تطبيقات جوال", category: "تقنية", salary: 10000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "محلل بيانات", category: "تقنية", salary: 9500, qualification: "بكالوريوس", type: "دوام كامل" },
+                // وظائف الرياض
+                { title: "مبرمج تطبيقات", category: "تقنية", salary: 9000, city: "الرياض" },
+                { title: "طبيب عام", category: "طبية", salary: 20000, city: "الرياض" },
+                { title: "مدير إداري", category: "إدارية", salary: 15000, city: "الرياض" },
+                { title: "معلم لغة عربية", category: "تعليمية", salary: 10000, city: "الرياض" },
+                { title: "مهندس مدني", category: "هندسية", salary: 12000, city: "الرياض" },
                 
-                // وظائف طبية
-                { title: "طبيب عام", category: "طبية", salary: 20000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "طبيب أخصائي", category: "طبية", salary: 30000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "طبيب أسنان", category: "طبية", salary: 25000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "صيدلي", category: "طبية", salary: 15000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "ممرض", category: "طبية", salary: 8000, qualification: "دبلوم", type: "دوام كامل" },
-                { title: "فني مختبر", category: "طبية", salary: 7000, qualification: "دبلوم", type: "دوام كامل" },
-                { title: "أخصائي أشعة", category: "طبية", salary: 12000, qualification: "دبلوم", type: "دوام كامل" },
-                { title: "أخصائي علاج طبيعي", category: "طبية", salary: 11000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "أخصائي تغذية", category: "طبية", salary: 9000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "إداري مستشفى", category: "طبية", salary: 8000, qualification: "بكالوريوس", type: "دوام كامل" },
-                
-                // وظائف إدارية
-                { title: "مدير إداري", category: "إدارية", salary: 15000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "سكرتير تنفيذي", category: "إدارية", salary: 8000, qualification: "دبلوم", type: "دوام كامل" },
-                { title: "مسؤول موارد بشرية", category: "إدارية", salary: 10000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مدير مشاريع", category: "إدارية", salary: 16000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "محاسب", category: "إدارية", salary: 9000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مراجع حسابات", category: "إدارية", salary: 11000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مدير مالي", category: "إدارية", salary: 18000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "محلل مالي", category: "إدارية", salary: 12000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مدير تسويق", category: "إدارية", salary: 14000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مسؤول علاقات عامة", category: "إدارية", salary: 8500, qualification: "بكالوريوس", type: "دوام كامل" },
-                
-                // وظائف تعليمية
-                { title: "معلم لغة عربية", category: "تعليمية", salary: 10000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "معلم لغة إنجليزية", category: "تعليمية", salary: 11000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "معلم رياضيات", category: "تعليمية", salary: 10500, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "معلم علوم", category: "تعليمية", salary: 10000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مرشد طلابي", category: "تعليمية", salary: 9500, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مدير مدرسة", category: "تعليمية", salary: 15000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "وكيل مدرسة", category: "تعليمية", salary: 12000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مشرف تربوي", category: "تعليمية", salary: 13000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "أخصائي صعوبات تعلم", category: "تعليمية", salary: 11000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "معلم تربية خاصة", category: "تعليمية", salary: 10000, qualification: "بكالوريوس", type: "دوام كامل" },
-                
-                // وظائف هندسية
-                { title: "مهندس مدني", category: "هندسية", salary: 12000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس معماري", category: "هندسية", salary: 13000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس ميكانيكي", category: "هندسية", salary: 12500, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس كهرباء", category: "هندسية", salary: 12000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس كيميائي", category: "هندسية", salary: 14000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس صناعي", category: "هندسية", salary: 13000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس بيئي", category: "هندسية", salary: 11000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس طرق", category: "هندسية", salary: 12000, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس إنشائي", category: "هندسية", salary: 13500, qualification: "بكالوريوس", type: "دوام كامل" },
-                { title: "مهندس مشاريع", category: "هندسية", salary: 15000, qualification: "بكالوريوس", type: "دوام كامل" }
-            ]
-        };
-
-        // تهيئة EmailJS
-        emailjs.init("PG83urRbb2ZKOmJvdh");
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // عناصر DOM
-            const mainPage = document.getElementById('mainPage');
-            const searchResultsPage = document.getElementById('searchResultsPage');
-            const jobPost = document.getElementById('jobPost');
-            const applicationForm = document.getElementById('applicationForm');
-            const searchInput = document.getElementById('searchInput');
-            const searchBtn = document.getElementById('searchBtn');
-            const backToMain = document.getElementById('backToMain');
-            const backToResults = document.getElementById('backToResults');
-            const backToJobPost = document.getElementById('backToJobPost');
-            const applyJobBtn = document.getElementById('applyJobBtn');
-            const applicationFormElement = document.getElementById('applicationFormElement');
-            const filtersSummary = document.getElementById('filtersSummary');
-            const filteredResultsCount = document.getElementById('filteredResultsCount');
-            const resultsCount = document.getElementById('resultsCount');
-
-            // متغيرات التطبيق
-            let currentFilters = {
-                city: null,
-                category: null,
-                qualification: null,
-                type: null,
-                salary: null,
-                search: null
-            };
-
-            let currentJob = null;
-
-            // عرض الوظائف العشوائية في الصفحة الرئيسية
-            displayRandomJobs(12, 'searchResults');
-
-            // إعداد أحداث النقر
-            setupEventListeners();
-
-            function setupEventListeners() {
-                // البحث
-                searchBtn.addEventListener('click', performSearch);
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') performSearch();
-                });
-
-                // التنقل بين الصفحات
-                backToMain.addEventListener('click', () => showPage('main'));
-                backToResults.addEventListener('click', () => showPage('search'));
-                backToJobPost.addEventListener('click', () => showPage('job'));
-                applyJobBtn.addEventListener('click', () => showPage('application'));
-
-                // التصفية حسب المدينة
-                document.querySelectorAll('[data-filter="city"]').forEach(item => {
-                    item.addEventListener('click', function() {
-                        const city = this.getAttribute('data-value');
-                        currentFilters.city = city;
-                        currentFilters.category = null;
-                        performFilter();
-                    });
-                });
-
-                // التصفية حسب التخصص
-                document.querySelectorAll('[data-filter="category"]').forEach(item => {
-                    item.addEventListener('click', function() {
-                        const category = this.getAttribute('data-value');
-                        currentFilters.category = category === 'all' ? null : category;
-                        performFilter();
-                    });
-                });
-
-                // التصفية حسب المؤهل
-                document.querySelectorAll('[data-filter="qualification"]').forEach(item => {
-                    item.addEventListener('click', function() {
-                        const qualification = this.getAttribute('data-value');
-                        currentFilters.qualification = qualification;
-                        performFilter();
-                    });
-                });
-
-                // التصفية حسب نوع الدوام
-                document.querySelectorAll('[data-filter="type"]').forEach(item => {
-                    item.addEventListener('click', function() {
-                        const type = this.getAttribute('data-value');
-                        currentFilters.type = type;
-                        performFilter();
-                    });
-                });
-
-                // التصفية حسب الراتب
-                document.querySelectorAll('.salary-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const salary = this.getAttribute('data-salary');
-                        currentFilters.salary = salary;
-                        performFilter();
-                    });
-                });
-
-                // التصفية السريعة
-                document.querySelectorAll('.snap-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const filter = this.getAttribute('data-filter');
-                        const value = this.getAttribute('data-value');
-                        currentFilters[filter] = value;
-                        performFilter();
-                    });
-                });
-
-                // إرسال نموذج التقديم
-                applicationFormElement.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    submitApplication();
-                });
-            }
-
-            function performSearch() {
-                const query = searchInput.value.trim();
-                if (query) {
-                    currentFilters.search = query;
-                    performFilter();
-                }
-            }
-
-            function performFilter() {
-                showPage('search');
-                updateFiltersSummary();
-                
-                const filteredJobs = filterJobs();
-                displayJobs(filteredJobs, 'filteredResults');
-                filteredResultsCount.textContent = `${filteredJobs.length} نتيجة`;
-            }
-
-            function filterJobs() {
-                return jobDatabase.jobs.filter(job => {
-                    let match = true;
-                    
-                    if (currentFilters.city) {
-                        // في تطبيق حقيقي، هنا سيتم التحقق من المدينة
-                        match = match && Math.random() > 0.3; // محاكاة للتصفية
-                    }
-                    
-                    if (currentFilters.category) {
-                        match = match && job.category === currentFilters.category;
-                    }
-                    
-                    if (currentFilters.qualification) {
-                        match = match && job.qualification === currentFilters.qualification;
-                    }
-                    
-                    if (currentFilters.type) {
-                        match = match && job.type === currentFilters.type;
-                    }
-                    
-                    if (currentFilters.salary) {
-                        match = match && job.salary >= parseInt(currentFilters.salary);
-                    }
-                    
-                    if (currentFilters.search) {
-                        const searchTerm = currentFilters.search.toLowerCase();
-                        match = match && (
-                            job.title.toLowerCase().includes(searchTerm) ||
-                            job.category.toLowerCase().includes(searchTerm)
-                        );
-                    }
-                    
-                    return match;
-                });
-            }
-
-            function updateFiltersSummary() {
-                let summary = "عرض الوظائف";
-                const filters = [];
-                
-                if (currentFilters.city) filters.push(`في ${currentFilters.city}`);
-                if (currentFilters.category) filters.push(`تخصص ${currentFilters.category}`);
-                if (currentFilters.qualification) filters.push(`مؤهل ${currentFilters.qualification}`);
-                if (currentFilters.type) filters.push(`${currentFilters.type}`);
-                if (currentFilters.salary) filters.push(`راتب ${currentFilters.salary}+`);
-                if (currentFilters.search) filters.push(`بحث: "${currentFilters.search}"`);
-                
-                if (filters.length > 0) {
-                    summary += " " + filters.join(" - ");
-                }
-                
-                filtersSummary.textContent = summary;
-            }
-
-            function displayRandomJobs(count, containerId) {
-                const container = document.getElementById(containerId);
-                const randomJobs = getRandomJobs(count);
-                displayJobs(randomJobs, containerId);
-            }
-
-            function displayJobs(jobs, containerId) {
-                const container = document.getElementById(containerId);
-                container.innerHTML = '';
-                
-                jobs.forEach((job, index) => {
-                    const company = jobDatabase.companies[Math.floor(Math.random() * jobDatabase.companies.length)];
-                    const city = jobDatabase.cities[Math.floor(Math.random() * jobDatabase.cities.length)];
-                    
-                    const jobCard = document.createElement('div');
-                    jobCard.className = 'job-card';
-                    jobCard.innerHTML = `
-                        <div class="city-badge">${city}</div>
-                        <div class="job-title">${job.title}</div>
-                        <div class="job-company">${company}</div>
-                        <div class="job-meta">
-                            <div>${job.salary} ريال</div>
-                            <div>${job.type} - ${job.qualification}</div>
-                        </div>
-                    `;
-                    
-                    jobCard.addEventListener('click', () => {
-                        showJobDetails(job, company, city);
-                        showPage('job');
-                    });
-                    
-                    container.appendChild(jobCard);
-                });
-            }
-
-            function getRandomJobs(count) {
-                const shuffled = [...jobDatabase.jobs].sort(() => 0.5 - Math.random());
-                return shuffled.slice(0, count);
-            }
-
-            function showJobDetails(job, company, city) {
-                currentJob = job;
-                
-                document.getElementById('jobPostTitle').textContent = job.title;
-                document.getElementById('jobPostCompany').textContent = company;
-                document.getElementById('postDate').textContent = new Date().toLocaleDateString('ar-SA');
-                document.getElementById('hiddenJobTitle').value = job.title;
-                document.getElementById('hiddenCompanyName').value = company;
-                
-                const jobContent = document.getElementById('jobContent');
-                jobContent.innerHTML = `
-                    <div class="section-title">المسميات الوظيفية:</div>
-                    <ul class="bullet-list">
-                        <li>${job.title}</li>
-                        <li>${job.title} مساعد</li>
-                    </ul>
-                    
-                    <div class="section-title">نبذة عن الشركة:</div>
-                    <p>${company} هي شركة رائدة في مجالها تأسست عام ${2000 + Math.floor(Math.random() * 23)}.</p>
-                    
-                    <div class="section-title">متطلبات الوظيفة:</div>
-                    <ul class="bullet-list">
-                        <li>${job.qualification} في مجال ذي صلة</li>
-                        <li>خبرة لا تقل عن ${Math.floor(Math.random() * 5) + 1} سنوات</li>
-                        <li>إجادة اللغة العربية</li>
-                    </ul>
-                    
-                    <div class="section-title">مميزات العمل:</div>
-                    <ul class="bullet-list">
-                        <li>راتب ${job.salary} ريال</li>
-                        <li>تأمين طبي شامل</li>
-                        <li>${job.type}</li>
-                        <li>فرص للتطور الوظيفي</li>
-                    </ul>
-                `;
-            }
-
-            function showPage(page) {
-                // إخفاء جميع الصفحات
-                mainPage.style.display = 'none';
-                searchResultsPage.style.display = 'none';
-                jobPost.style.display = 'none';
-                applicationForm.style.display = 'none';
-                
-                // إظهار الصفحة المطلوبة
-                switch(page) {
-                    case 'main':
-                        mainPage.style.display = 'block';
-                        break;
-                    case 'search':
-                        searchResultsPage.style.display = 'block';
-                        searchResultsPage.classList.add('active');
-                        break;
-                    case 'job':
-                        jobPost.style.display = 'block';
-                        jobPost.classList.add('active');
-                        break;
-                    case 'application':
-                        applicationForm.style.display = 'block';
-                        applicationForm.classList.add('active');
-                        break;
-                }
-            }
-
-            function submitApplication() {
-                const submitBtn = applicationFormElement.querySelector('.submit-btn');
-                const messageDiv = document.getElementById('applicationMessage');
-                
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'جاري الإرسال...';
-                
-                const serviceID = "service_azwkc59";
-                const templateID = "email_0iYwUaANbbuqUqq0RZU9GXE";
-                
-                emailjs.sendForm(serviceID, templateID, applicationFormElement)
-                    .then(function() {
-                        messageDiv.textContent = 'تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.';
-                        messageDiv.className = 'form-message success';
-                        messageDiv.style.display = 'block';
-                        
-                        applicationFormElement.reset();
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'إرسال الطلب';
-                        
-                        setTimeout(() => {
-                            showPage('main');
-                        }, 3000);
-                    }, function(error) {
-                        messageDiv.textContent = 'فشل في إرسال الطلب. يرجى المحاولة مرة أخرى.';
-                        messageDiv.className = 'form-message error';
-                        messageDiv.style.display = 'block';
-                        
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'إرسال الطلب';
-                    });
-            }
-        });
-    </script>
-</body>
-                </html>
+                // وظائف جدة
+                { title: "مطور ويب", category: "تقنية", salary: 8500, city: "جدة" },
+                { title: "طبيب أسنان", category: "طبية", salary: 25000, city: "جدة" },
+                { title: "محاسب", category: "إدارية", salary: 9000, city: "جدة" },
+                { title: "معلم لغة إنجليزية", category: "تعليمية", salary: 11000, city: "جدة" },
+                { title: "مهندس معماري", category: "هند
