@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وظائف السعودية 2030.كوم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <style>
         /* أنماط css العامة */
         * {
@@ -15,7 +16,7 @@
         }
         
         body {
-            background-color: #f5f5f5; /* لون خلفية أفتح */
+            background-color: #f5f5f5;
             color: #333;
             line-height: 1.6;
         }
@@ -47,22 +48,22 @@
             color: #555;
         }
         
-        /* الشعار - استعادة التصميم الأصلي */
+        /* الشعار */
         .logo-container {
             position: relative;
             text-align: center;
             padding: 15px 0;
-            background: linear-gradient(to bottom, #f5f5dc, #e8e8c9); /* خلفية بيج فاتح */
-            border: 2px solid #4c7836; /* إطار أخضر داكن */
+            background: linear-gradient(to bottom, #f5f5dc, #e8e8c9);
+            border: 2px solid #4c7836;
             margin: 5px 0;
-            border-radius: 5px; /* حواف مستديرة */
+            border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .logo {
             font-weight: bold;
             font-size: 18px;
-            color: #4c7836; /* لون أخضر داكن */
+            color: #4c7836;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -75,10 +76,10 @@
         }
         
         .vision-2030 {
-            font-size: 10px; /* حجم أصغر لرؤية 2030 */
+            font-size: 10px;
             color: #333;
             position: absolute;
-            top: -8px; /* لتظهر فوق النخلة */
+            top: -8px;
             left: -2px;
             font-weight: bold;
             background: rgba(255,255,255,0.8);
@@ -96,7 +97,7 @@
             background-color: white;
             border-bottom: 1px solid #ddd;
             scrollbar-width: none;
-            margin-bottom: 5px; /* تباعد بين الشرائط */
+            margin-bottom: 5px;
         }
         
         .nav-bar::-webkit-scrollbar {
@@ -108,17 +109,17 @@
             margin: 0 3px;
             background-color: #f0f0f0;
             border-radius: 20px;
-            font-size: 11px; /* حجم خط أصغر */
+            font-size: 11px;
             flex-shrink: 0;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex; /* لترتيب الأيقونة والنص */
+            display: flex;
             align-items: center;
-            gap: 5px; /* مسافة بين الأيقونة والنص */
+            gap: 5px;
         }
         
         .nav-item.active {
-            background-color: #4c7836; /* أخضر داكن */
+            background-color: #4c7836;
             color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
@@ -129,7 +130,7 @@
         }
         
         .nav-item i {
-            font-size: 13px; /* حجم الأيقونة */
+            font-size: 13px;
         }
 
         /* شريط البحث */
@@ -196,7 +197,7 @@
         
         .ad-item:hover {
             transform: translateX(5px);
-            color: #4c7836; /* لون أخضر عند التحويم */
+            color: #4c7836;
         }
         
         .ad-item:last-child {
@@ -247,11 +248,11 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* أزرار التواصل - استعادة التصميم الأصلي */
+        /* أزرار التواصل */
         .social-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px; /* تباعد بين الأزرار */
+            gap: 8px;
             margin: 15px 0;
         }
         
@@ -266,7 +267,7 @@
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             flex: 1;
-            min-width: calc(50% - 4px); /* لزرين في الصف مع الأخذ في الاعتبار الـ gap */
+            min-width: calc(50% - 4px);
             transition: all 0.3s ease;
         }
         
@@ -303,7 +304,7 @@
         
         /* نتائج البحث */
         .results-header {
-            background-color: #8d0000; /* أحمر داكن */
+            background-color: #8d0000;
             color: white;
             padding: 10px 15px;
             font-weight: bold;
@@ -329,20 +330,20 @@
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-right: 3px solid transparent; /* شريط جانبي */
+            border-right: 3px solid transparent;
         }
         
         .job-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-            border-right-color: #4c7836; /* لون الشريط عند التحويم */
+            border-right-color: #4c7836;
         }
         
         .city-badge {
             position: absolute;
             top: 10px;
             left: 10px;
-            background-color: #8d0000; /* أحمر داكن */
+            background-color: #8d0000;
             color: white;
             padding: 2px 6px;
             border-radius: 3px;
@@ -354,7 +355,7 @@
             font-weight: bold;
             margin-bottom: 5px;
             font-size: 16px;
-            padding-right: 0; /* يبدأ من اليمين */
+            padding-right: 0;
             color: #2c3e50;
         }
         
@@ -431,7 +432,7 @@
         }
         
         .salary-btn.blue {
-            background-color: #1e6ea7; /* أزرق داكن */
+            background-color: #1e6ea7;
         }
         
         .salary-btn.blue:hover {
@@ -447,7 +448,7 @@
         
         .snap-btn {
             padding: 8px 12px;
-            background-color: #8d0000; /* أحمر داكن */
+            background-color: #8d0000;
             color: white;
             border: none;
             border-radius: 5px;
@@ -472,7 +473,7 @@
             margin-bottom: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: none; /* مخفية افتراضيا */
+            display: none;
         }
         
         .job-post.active {
@@ -504,7 +505,7 @@
         }
         
         .publish-date {
-            background-color: #ffd700; /* أصفر */
+            background-color: #ffd700;
             padding: 3px 8px;
             border-radius: 3px;
             font-weight: bold;
@@ -542,7 +543,7 @@
         .bullet-list {
             padding-right: 20px;
             margin-bottom: 15px;
-            list-style: none; /* إزالة النقطة الافتراضية */
+            list-style: none;
         }
         
         .bullet-list li {
@@ -552,7 +553,7 @@
         }
         
         .bullet-list li:before {
-            content: "•"; /* إضافة نقطة مخصصة */
+            content: "•";
             color: #4c7836;
             font-weight: bold;
             position: absolute;
@@ -570,8 +571,11 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            display: block; /* لجعل الزر يأخذ العرض الكامل */
+            display: block;
             text-decoration: none;
+            border: none;
+            width: 100%;
+            font-size: 16px;
         }
         
         .apply-btn:hover {
@@ -587,7 +591,7 @@
             margin: 20px 0;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: none; /* مخفية افتراضيا */
+            display: none;
         }
         
         .contact-form.active {
@@ -698,7 +702,7 @@
         
         /* زر العودة */
         .back-btn {
-            background-color: #8d0000; /* أحمر داكن */
+            background-color: #8d0000;
             color: white;
             border: none;
             padding: 10px 15px;
@@ -738,6 +742,76 @@
             margin: 0 auto 10px;
         }
 
+        /* نموذج التقديم للوظيفة */
+        .application-form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .application-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-input-label {
+            display: block;
+            padding: 12px;
+            background-color: #f0f0f0;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .file-list {
+            margin-top: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+        
+        .file-item button {
+            background: none;
+            border: none;
+            color: #8d0000;
+            cursor: pointer;
+        }
+        
         /* تحسينات للجوال */
         @media (max-width: 768px) {
             .nav-item {
@@ -748,10 +822,10 @@
                 font-size: 11px;
             }
             .social-btn {
-                min-width: 100%; /* زر واحد في الصف على الشاشات الصغيرة */
+                min-width: 100%;
             }
             .salary-btn, .snap-btn {
-                min-width: calc(50% - 4px); /* زرين في الصف */
+                min-width: calc(50% - 4px);
             }
         }
     </style>
@@ -780,10 +854,10 @@
         </div>
         
         <div class="nav-bar">
-            <div class="nav-item active" data-filter="type" data-value="حكومي"><i class="fas fa-building"></i> وظائف حكومية</div>
-            <div class="nav-item" data-filter="type" data-value="نسائي"><i class="fas fa-female"></i> نسائية</div>
-            <div class="nav-item" data-filter="type" data-value="عن بعد"><i class="fas fa-laptop-code"></i> عن بعد</div>
-            <div class="nav-item" data-filter="type" data-value="تدريب"><i class="fas fa-chalkboard-teacher"></i> تدريب منتهي بالتوظيف</div>
+            <div class="nav-item active" data-filter="type" data-value="all"><i class="fas fa-briefcase"></i> جميع الوظائف</div>
+            <div class="nav-item" data-filter="type" data-value="technical"><i class="fas fa-laptop-code"></i> تقنية</div>
+            <div class="nav-item" data-filter="type" data-value="medical"><i class="fas fa-user-md"></i> طبية</div>
+            <div class="nav-item" data-filter="type" data-value="administrative"><i class="fas fa-users"></i> إدارية</div>
         </div>
         
         <div class="nav-bar">
@@ -799,9 +873,9 @@
             <div class="nav-item" data-filter="qualification" data-value="بكالوريوس"><i class="fas fa-user-graduate"></i> وظائف بكالوريوس</div>
             <div class="nav-item" data-filter="qualification" data-value="دبلوم"><i class="fas fa-certificate"></i> وظائف دبلوم</div>
             <div class="nav-item" data-filter="qualification" data-value="ثانوي"><i class="fas fa-school"></i> وظائف ثانوي</div>
-            <div class="nav-item" data-filter="type" data-value="جزئي"><i class="fas fa-hourglass-half"></i> دوام جزئي</div>
-            <div class="nav-item" data-filter="type" data-value="كامل"><i class="fas fa-clock"></i> دوام كامل</div>
-            <div class="nav-item" data-filter="type" data-value="دورات"><i class="fas fa-lightbulb"></i> دورات تدريبية</div>
+            <div class="nav-item" data-filter="type" data-value="part-time"><i class="fas fa-hourglass-half"></i> دوام جزئي</div>
+            <div class="nav-item" data-filter="type" data-value="full-time"><i class="fas fa-clock"></i> دوام كامل</div>
+            <div class="nav-item" data-filter="type" data-value="remote"><i class="fas fa-laptop-house"></i> عن بعد</div>
         </div>
         
         <div class="search-container">
@@ -817,28 +891,28 @@
             <div class="ad-item" data-ad="1">
                 <div class="green-dot"></div>
                 <div class="ad-content">
-                    <div class="ad-title">شركة ثمانية تعلن عن طرح 30 وظيفة تشمل وظائف عن بعد للرجال والنساء</div>
+                    <div class="ad-title">أكثر من 5000 وظيفة شاغرة في مختلف التخصصات والمجالات</div>
                 </div>
             </div>
             
             <div class="ad-item" data-ad="2">
                 <div class="green-dot"></div>
                 <div class="ad-content">
-                    <div class="ad-title">وزارة النقل والخدمات اللوجستية تعلن عن فتح باب التوظيف للرجال والنساء</div>
+                    <div class="ad-title">القطاع الصحي يعلن عن 1200 وظيفة طبية وإدارية في مختلف المدن</div>
                 </div>
             </div>
             
             <div class="ad-item" data-ad="3">
                 <div class="green-dot"></div>
                 <div class="ad-content">
-                    <div class="ad-title">الأكاديمية السعودية للتجزئة تعلن عن برامج دبلوم بتوظيف فوري ومكافأة شهرية (ثانوية فأعلى)</div>
+                    <div class="ad-title">القطاع التقني يعلن عن 800 وظيفة للمبرمجين ومطوري البرمجيات</div>
                 </div>
             </div>
             
             <div class="ad-item" data-ad="4">
                 <div class="green-dot"></div>
                 <div class="ad-content">
-                    <div class="ad-title"><span class="star">★</span> دورات مجانية (عن بعد) مع شهادات</div>
+                    <div class="ad-title"><span class="star">★</span> وظائف إدارية ومحاسبية في كبرى الشركات السعودية</div>
                 </div>
             </div>
         </div>
@@ -851,7 +925,7 @@
                 <span>تيليجرام وظائف</span>
             </a>
             
-            <a href="https://wa.me/966500000000" class="social-btn" target="_blank">
+            <a href="https://wa.me/966580422371" class="social-btn" target="_blank">
                 <div class="social-icon whatsapp">
                     <i class="fab fa-whatsapp"></i>
                 </div>
@@ -881,32 +955,10 @@
         <div id="searchResults">
             <div class="results-header">
                 <span>نتائج البحث</span>
-                <span class="results-count" id="resultsCount">1 نتيجة</span>
+                <span class="results-count" id="resultsCount">0 نتيجة</span>
             </div>
             
-            <div class="job-card" data-job="1">
-                <div class="city-badge">جدة</div>
-                <div class="job-title">وظائف عن بعد في إدارة المحتوى شاغرة في شركة ترتبيك</div>
-                <div class="job-company">شركة ترتبيك للتسويق الرقمي</div>
-                <div class="job-meta">
-                    <div id="currentTime">22:23، 6/11/2025</div>
-                    <div class="job-views">
-                        2700 <div class="views-bar" style="width: 70%;"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="job-card" data-job="2">
-                <div class="city-badge">الرياض</div>
-                <div class="job-title">وظائف إدارية شاغرة في هيئة الزكاة والضريبة والجمارك (لجميع التخصصات)</div>
-                <div class="job-company">هيئة الزكاة والضريبة والجمارك</div>
-                <div class="job-meta">
-                    <div id="currentTime2">22:23، 6/11/2025</div>
-                    <div class="job-views">
-                        1200 <div class="views-bar" style="width: 40%;"></div>
-                    </div>
-                </div>
-            </div>
+            <!-- سيتم إضافة بطاقات الوظائف ديناميكياً هنا -->
         </div>
         
         <div class="advanced-search" id="advancedSearchBtn">
@@ -921,86 +973,121 @@
         </div>
         
         <div class="snap-filters">
-            <button class="snap-btn" data-filter="type" data-value="نسائي">سناب وظائف نسائية</button>
-            <button class="snap-btn" data-filter="type" data-value="عن بعد">سناب وظائف عن بعد</button>
-            <button class="snap-btn" data-filter="city" data-value="الرياض">سناب وظائف الرياض</button>
-            <button class="snap-btn" data-filter="city" data-value="عسير">سناب وظائف عسير</button>
+            <button class="snap-btn" data-filter="type" data-value="medical">وظائف طبية</button>
+            <button class="snap-btn" data-filter="type" data-value="technical">وظائف تقنية</button>
+            <button class="snap-btn" data-filter="type" data-value="administrative">وظائف إدارية</button>
+            <button class="snap-btn" data-filter="city" data-value="الرياض">وظائف الرياض</button>
         </div>
         
+        <!-- صفحة تفاصيل الوظيفة -->
         <div class="job-post" id="jobPost">
             <button class="back-btn" id="backToResults">
                 <i class="fas fa-arrow-right"></i> العودة للنتائج
             </button>
             
-            <div class="job-post-header">وظائف عن بعد في إدارة المحتوى شاغرة في شركة ترتبيك</div>
+            <div class="job-post-header" id="jobPostTitle">عنوان الوظيفة</div>
             
             <div class="job-meta-info">
-                <div>بواسطة: وظائف السعودية 24</div>
+                <div id="jobPostCompany">اسم الشركة</div>
                 <div class="publish-date" id="postDate">17-11-2025</div>
             </div>
             
-            <div class="job-tags">
-                <div class="tag">#السعودية</div>
-                <div class="tag">#شركة_ثمانية</div>
-                <div class="tag">#وظائف_عن_بعد</div>
-                <div class="tag">#ادارة_المحتوى</div>
+            <div class="job-tags" id="jobTags">
+                <!-- سيتم إضافة الوسوم ديناميكياً -->
             </div>
             
-            <div class="job-content">
-                <div class="section-title">المسميات الوظيفية:</div>
-                <ul class="bullet-list">
-                    <li>مدير محتوى</li>
-                    <li>كاتب محتوى</li>
-                    <li>محرر فيديو</li>
-                    <li>مصمم جرافيك</li>
-                    <li>مسؤول وسائل تواصل اجتماعي</li>
-                </ul>
-                
-                <div class="section-title">نبذة عن الشركة:</div>
-                <p>شركة رائدة في مجال التسويق الرقمي وإدارة المحتوى، تأسست عام 2018 ولها حضور قوي في السوق السعودي. نتميز بتقديم حلول مبتكرة في مجال التسويق الإلكتروني وإدارة المحتوى.</p>
-                
-                <div class="section-title">متطلبات الوظيفة:</div>
-                <ul class="bullet-list">
-                    <li>خبرة لا تقل عن سنتين في مجال إدارة المحتوى</li>
-                    <li>إجادة اللغة العربية والإنجليزية</li>
-                    <li>القدرة على العمل ضمن فريق</li>
-                    <li>الإلمام بمنصات التواصل الاجتماعي</li>
-                </ul>
-                
-                <div class="section-title">مميزات العمل في الشركة:</div>
-                <ul class="bullet-list">
-                    <li>رواتب تنافسية تبدأ من 9000 ريال</li>
-                    <li>تأمين طبي شامل</li>
-                    <li>بيئة عمل مرنة عن بعد</li>
-                    <li>فرص للتطور الوظيفي</li>
-                    <li>تدريب مستمر وتطوير مهارات</li>
-                </ul>
+            <div class="job-content" id="jobContent">
+                <!-- سيتم إضافة محتوى الوظيفة ديناميكياً -->
             </div>
             
-            <a href="https://example.com/apply" class="apply-btn" target="_blank">التقديم من هنا</a>
+            <button class="apply-btn" id="applyJobBtn">التقديم على الوظيفة</button>
         </div>
         
+        <!-- نموذج التقديم للوظيفة -->
+        <div class="application-form" id="applicationForm">
+            <button class="back-btn" id="backToJobPost">
+                <i class="fas fa-arrow-right"></i> العودة للوظيفة
+            </button>
+            
+            <div class="form-title">تقديم طلب التوظيف</div>
+            <form id="applicationFormElement">
+                <input type="hidden" name="job_title" id="hiddenJobTitle">
+                <input type="hidden" name="company_name" id="hiddenCompanyName">
+                
+                <div class="form-group">
+                    <label class="form-label" for="full_name">الاسم الكامل</label>
+                    <input type="text" id="full_name" name="full_name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="applicantEducation">المؤهل العلمي</label>
+                    <input type="text" id="applicantEducation" name="education" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="applicantExperience">سنوات الخبرة</label>
+                    <input type="number" id="applicantExperience" name="experience" class="form-input" required min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="certificates_and_docs">الوثائق والشهادات</label>
+                    <textarea id="certificates_and_docs" name="certificates_and_docs" class="form-textarea" placeholder="اذكر الشهادات والوثائق التي تمتلكها..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">رفع المستندات المطلوبة (اختياري)</label>
+                    <div class="file-input-container">
+                        <input type="file" class="file-input" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                        <label for="fileInput" class="file-input-label">
+                            <i class="fas fa-cloud-upload-alt"></i> انقر لرفع الملفات
+                        </label>
+                    </div>
+                    <div class="file-list" id="fileList"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="coverLetter">رسالة التغطية (اختياري)</label>
+                    <textarea id="coverLetter" name="message" class="form-textarea" placeholder="اكتب رسالة تغطية تشرح فيها أسباب اهتمامك بالوظيفة..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitApplicationBtn">إرسال الطلب</button>
+                
+                <div class="form-message" id="applicationMessage"></div>
+            </form>
+        </div>
+        
+        <!-- نموذج الاتصال -->
         <div class="contact-form" id="contactForm">
             <div class="form-title">تواصل معنا</div>
             <form id="contactFormElement">
                 <div class="form-group">
                     <label class="form-label" for="name">الاسم الكامل</label>
-                    <input type="text" id="name" class="form-input" required>
+                    <input type="text" id="name" name="full_name" class="form-input" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" class="form-input" required>
+                    <label class="form-label" for="contact_email">البريد الإلكتروني</label>
+                    <input type="email" id="contact_email" name="email" class="form-input" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="phone">رقم الهاتف</label>
-                    <input type="tel" id="phone" class="form-input" required>
+                    <label class="form-label" for="contact_phone">رقم الهاتف</label>
+                    <input type="tel" id="contact_phone" name="phone" class="form-input" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="message">الرسالة</label>
-                    <textarea id="message" class="form-textarea" placeholder="اكتب رسالتك هنا..." required></textarea>
+                    <label class="form-label" for="contact_message">الرسالة</label>
+                    <textarea id="contact_message" name="message" class="form-textarea" placeholder="اكتب رسالتك هنا..." required></textarea>
                 </div>
                 
                 <button type="submit" class="submit-btn" id="submitBtn">إرسال الرسالة</button>
@@ -1011,6 +1098,11 @@
     </div>
 
     <script>
+        // تهيئة EmailJS مع المفاتيح الخاصة بك
+        (function() {
+            emailjs.init("PG83urRbb2ZKOmJvdh");
+        })();
+
         // قاعدة بيانات الشركات السعودية
         const companies = [
             "أرامكو السعودية", "سابك", "الاتصالات السعودية", "الراجحي", "مصرف الراجحي",
@@ -1026,28 +1118,47 @@
             "شركة المياه الوطنية", "شركة الكهرباء السعودية", "شركة الخطوط السعودية", "شركة النقل الجماعي", "شركة مطارات الرياض"
         ];
 
-        // وظائف المحاسبة المختلفة
-        const accountingJobs = [
-            "محاسب", "محاسب قانوني", "محاسب تكاليف", "محاسب ضرائب", "محاسب رواتب",
-            "محاسب بنوك", "محاسب استثمار", "محاسب مالي", "محاسب إداري", "محاسب مشتريات",
-            "محاسب مبيعات", "محاسب مخازن", "محاسب مقاولات", "محاسب عقارات", "محاسب مستشفيات",
-            "محاسب فنادق", "محاسب مدارس", "محاسب جامعات", "محاسب شركات", "محاسب مؤسسات",
-            "محاسب حكومي", "محاسب بلديات", "محاسب وزارات", "محاسب هيئات", "محاسب جمعيات",
-            "محاسب تعاونيات", "محاسب شراكات", "محاسب أفراد", "محاسب شركات صغيرة", "محاسب شركات متوسطة",
-            "محاسب شركات كبيرة", "محاسب متدرب", "محاسب مبتدئ", "محاسب متوسط", "محاسب كبير",
-            "محاسب أول", "محاسب رئيسي", "مدير حسابات", "رئيس قسم المحاسبة", "مراجع حسابات"
-        ];
-
-        // وظائف متنوعة في مجالات أخرى
-        const otherJobs = [
-            "مدير مبيعات", "مندوب مبيعات", "مسوق إلكتروني", "مصمم جرافيك", "مطور ويب",
-            "مبرمج", "مهندس برمجيات", "مهندس شبكات", "مهندس اتصالات", "مهندس مدني",
-            "مهندس معماري", "مهندس ميكانيكي", "مهندس كهرباء", "فني صيانة", "سكرتير",
-            "مسؤول موارد بشرية", "مدير مشاريع", "محلل أعمال", "مستشار مالي", "مدير تسويق",
-            "محرر محتوى", "كاتب إعلانات", "مترجم", "مدقق لغوي", "باحث",
-            "أخصائي اجتماعي", "معلم", "مدرب", "طبيب", "ممرض",
-            "صيدلي", "محامي", "مهندس صناعي", "فني مختبر", "سائق"
-        ];
+        // جميع التخصصات والوظائف المتاحة
+        const allJobs = {
+            technical: [
+                "مبرمج تطبيقات", "مطور ويب", "مهندس برمجيات", "مهندس شبكات", "مهندس اتصالات",
+                "محلل نظم", "مدير قواعد بيانات", "أخصائي أمن سيبراني", "مصمم واجهات مستخدم", "مهندس DevOps",
+                "مهندس سحابة إلكترونية", "مطور تطبيقات جوال", "مهندس بيانات", "محلل بيانات", "مهندس ذكاء اصطناعي",
+                "مهندس تعلم آلي", "مهندس روبوتات", "فني دعم فني", "مدير مشاريع تقنية", "مهندس نظم"
+            ],
+            medical: [
+                "طبيب عام", "طبيب أخصائي", "طبيب أسنان", "صيدلي", "ممرض",
+                "فني مختبر", "أخصائي أشعة", "أخصائي علاج طبيعي", "أخصائي تغذية", "إداري مستشفى",
+                "طبيب تخدير", "طبيب جراح", "طبيب أطفال", "طبيب نساء وتوليد", "طبيب باطنية",
+                "طبيب عيون", "طبيب أنف وأذن وحنجرة", "طبيب جلدية", "طبيب أعصاب", "طبيب نفسي",
+                "طبيب قلب", "طبيب أورام", "طبيب عظام", "طبيب مسالك بولية", "طبيب جهاز هضمي"
+            ],
+            administrative: [
+                "مدير إداري", "سكرتير تنفيذي", "مسؤول موارد بشرية", "مدير مشاريع", "محاسب",
+                "مراجع حسابات", "مدير مالي", "محلل مالي", "مدير تسويق", "مسؤول علاقات عامة",
+                "مدير مبيعات", "مندوب مبيعات", "مسؤول مشتريات", "مدير مخازن", "مسؤول شؤون موظفين",
+                "مدير تدريب وتطوير", "مسؤول رواتب", "مدير جودة", "مسؤول أرشيف", "مدير مكتب"
+            ],
+            accounting: [
+                "محاسب", "محاسب قانوني", "محاسب تكاليف", "محاسب ضرائب", "محاسب رواتب",
+                "محاسب بنوك", "محاسب استثمار", "محاسب مالي", "محاسب إداري", "محاسب مشتريات",
+                "محاسب مبيعات", "محاسب مخازن", "محاسب مقاولات", "محاسب عقارات", "محاسب مستشفيات",
+                "محاسب فنادق", "محاسب مدارس", "محاسب جامعات", "محاسب شركات", "محاسب مؤسسات",
+                "محاسب حكومي", "محاسب بلديات", "محاسب وزارات", "محاسب هيئات", "محاسب جمعيات"
+            ],
+            education: [
+                "معلم لغة عربية", "معلم لغة إنجليزية", "معلم رياضيات", "معلم علوم", "معلم دراسات اجتماعية",
+                "معلم تربية إسلامية", "معلم تربية فنية", "معلم تربية بدنية", "معلم حاسب آلي", "معلم تربية خاصة",
+                "مرشد طلابي", "مدير مدرسة", "وكيل مدرسة", "مشرف تربوي", "أخصائي صعوبات تعلم",
+                "أخصائي نطق وتخاطب", "معلم روضة", "معلم صفوف أولية", "معلم تعليم الكبار", "مدرب"
+            ],
+            engineering: [
+                "مهندس مدني", "مهندس معماري", "مهندس ميكانيكي", "مهندس كهرباء", "مهندس كيميائي",
+                "مهندس صناعي", "مهندس بيئي", "مهندس طرق", "مهندس إنشائي", "مهندس تخطيط",
+                "مهندس مشاريع", "مهندس جودة", "مهندس سلامة", "مهندس صيانة", "مهندس تكييف وتبريد",
+                "مهندس إنتاج", "مهندس تصنيع", "مهندس تحكم", "مهندس اتصالات", "مهندس بترول"
+            ]
+        };
 
         // المدن السعودية
         const cities = [
@@ -1068,6 +1179,7 @@
             const advancedSearchBtn = document.getElementById('advancedSearchBtn');
             const contactBtn = document.getElementById('contactBtn');
             const backToResults = document.getElementById('backToResults');
+            const backToJobPost = document.getElementById('backToJobPost');
             const jobPost = document.getElementById('jobPost');
             const contactForm = document.getElementById('contactForm');
             const contactFormElement = document.getElementById('contactFormElement');
@@ -1076,34 +1188,129 @@
             const refreshBtn = document.getElementById('refreshBtn');
             const loadingIndicator = document.getElementById('loadingIndicator');
             const resultsCount = document.getElementById('resultsCount');
-            const jobTimeElements = document.querySelectorAll('[id^="currentTime"]');
             const postDateElement = document.getElementById('postDate');
             const adItems = document.querySelectorAll('.ad-item');
-            const jobCards = document.querySelectorAll('.job-card');
             const searchResults = document.getElementById('searchResults');
+            const applyJobBtn = document.getElementById('applyJobBtn');
+            const applicationForm = document.getElementById('applicationForm');
+            const applicationFormElement = document.getElementById('applicationFormElement');
+            const submitApplicationBtn = document.getElementById('submitApplicationBtn');
+            const applicationMessage = document.getElementById('applicationMessage');
+            const fileInput = document.getElementById('fileInput');
+            const fileList = document.getElementById('fileList');
+            const hiddenJobTitle = document.getElementById('hiddenJobTitle');
+            const hiddenCompanyName = document.getElementById('hiddenCompanyName');
+            
+            // متغيرات التطبيق
+            let currentJob = null;
+            let uploadedFiles = [];
             
             // تحديث الوقت الحالي
             function updateCurrentTime() {
                 const now = new Date();
-                const timeString = now.toLocaleTimeString('ar-SA', { 
-                    hour: '2-digit', 
-                    minute: '2-digit',
-                    hour12: true 
-                });
                 const dateString = now.toLocaleDateString('ar-SA');
-
-                jobTimeElements.forEach(el => {
-                    el.textContent = `${timeString}، ${dateString}`;
-                });
                 
                 if (postDateElement) {
                     postDateElement.textContent = dateString;
                 }
             }
             
-            // تحديث الوقت كل دقيقة
+            // تحديث الوقت عند التحميل
             updateCurrentTime();
-            setInterval(updateCurrentTime, 60000);
+            
+            // إعداد إرسال البريد الإلكتروني
+            function setupEmailJS() {
+                // نموذج التقديم للوظيفة
+                document.getElementById('applicationFormElement').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    
+                    // تحديث الحقول المخفية بالوظيفة الحالية
+                    if (currentJob) {
+                        hiddenJobTitle.value = currentJob.jobTitle;
+                        hiddenCompanyName.value = currentJob.company;
+                    }
+                    
+                    // تعطيل زر الإرسال
+                    submitApplicationBtn.disabled = true;
+                    submitApplicationBtn.textContent = 'جاري إرسال الطلب...';
+                    
+                    const serviceID = "service_azwkc59";
+                    const templateID = "email_0iYwUaANbbuqUqq0RZU9GXE";
+                    
+                    emailjs.sendForm(serviceID, templateID, this)
+                        .then(function() {
+                            applicationMessage.textContent = 'تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.';
+                            applicationMessage.className = 'form-message success';
+                            applicationMessage.style.display = 'block';
+                            
+                            // إعادة تعيين النموذج
+                            applicationFormElement.reset();
+                            uploadedFiles = [];
+                            fileList.innerHTML = '';
+                            
+                            // إعادة تمكين زر الإرسال
+                            submitApplicationBtn.disabled = false;
+                            submitApplicationBtn.textContent = 'إرسال الطلب';
+                            
+                            // إخفاء الرسالة بعد 5 ثوانٍ والعودة للصفحة الرئيسية
+                            setTimeout(() => {
+                                applicationMessage.style.display = 'none';
+                                showMainPage();
+                            }, 5000);
+                        }, function(error) {
+                            applicationMessage.textContent = 'فشل في إرسال الطلب: ' + JSON.stringify(error);
+                            applicationMessage.className = 'form-message error';
+                            applicationMessage.style.display = 'block';
+                            
+                            // إعادة تمكين زر الإرسال
+                            submitApplicationBtn.disabled = false;
+                            submitApplicationBtn.textContent = 'إرسال الطلب';
+                        });
+                });
+                
+                // نموذج الاتصال
+                document.getElementById('contactFormElement').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    
+                    // تعطيل زر الإرسال
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'جاري الإرسال...';
+                    
+                    const serviceID = "service_azwkc59";
+                    const templateID = "email_0iYwUaANbbuqUqq0RZU9GXE";
+                    
+                    emailjs.sendForm(serviceID, templateID, this)
+                        .then(function() {
+                            formMessage.textContent = 'تم إرسال رسالتك بنجاح! سيتم الرد عليك في أقرب وقت.';
+                            formMessage.className = 'form-message success';
+                            formMessage.style.display = 'block';
+                            
+                            // إعادة تعيين النموذج
+                            contactFormElement.reset();
+                            
+                            // إعادة تمكين زر الإرسال
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'إرسال الرسالة';
+                            
+                            // إخفاء الرسالة بعد 5 ثوانٍ
+                            setTimeout(() => {
+                                formMessage.style.display = 'none';
+                                showMainPage();
+                            }, 5000);
+                        }, function(error) {
+                            formMessage.textContent = 'فشل في إرسال الرسالة: ' + JSON.stringify(error);
+                            formMessage.className = 'form-message error';
+                            formMessage.style.display = 'block';
+                            
+                            // إعادة تمكين زر الإرسال
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'إرسال الرسالة';
+                        });
+                });
+            }
+            
+            // استدعاء إعداد EmailJS
+            setupEmailJS();
             
             // وظيفة المحاكاة للتصفية
             function simulateFiltering(type, value) {
@@ -1112,7 +1319,7 @@
                     hideLoading();
                     const jobCount = Math.floor(Math.random() * 30) + 5;
                     resultsCount.textContent = `${jobCount} نتيجة`;
-                    displayRandomJobs(jobCount);
+                    displayRandomJobs(jobCount, type, value);
                 }, 1000);
             }
 
@@ -1172,7 +1379,7 @@
                         hideLoading();
                         const jobCount = Math.floor(Math.random() * 50) + 1;
                         resultsCount.textContent = `${jobCount} نتيجة`;
-                        displayRandomJobs(jobCount);
+                        displayRandomJobs(jobCount, 'search', query);
                     }, 1500);
                 }
             }
@@ -1182,41 +1389,66 @@
                 alert('سيتم فتح نافذة البحث المتقدم قريباً');
             });
             
-            // تبديل العرض بين الصفحة الرئيسية ونموذج الاتصال وتفاصيل الوظيفة
-            function toggleMainDisplay(show) {
-                document.getElementById('searchResults').style.display = show ? 'block' : 'none';
-                document.querySelector('.advanced-search').style.display = show ? 'block' : 'none';
-                document.querySelector('.salary-filters').style.display = show ? 'flex' : 'none';
-                document.querySelector('.snap-filters').style.display = show ? 'flex' : 'none';
+            // تبديل العرض بين الصفحات المختلفة
+            function showMainPage() {
+                document.getElementById('searchResults').style.display = 'block';
+                document.querySelector('.advanced-search').style.display = 'block';
+                document.querySelector('.salary-filters').style.display = 'flex';
+                document.querySelector('.snap-filters').style.display = 'flex';
                 contactForm.classList.remove('active');
                 jobPost.classList.remove('active');
+                applicationForm.classList.remove('active');
+            }
+            
+            function showJobPost() {
+                document.getElementById('searchResults').style.display = 'none';
+                document.querySelector('.advanced-search').style.display = 'none';
+                document.querySelector('.salary-filters').style.display = 'none';
+                document.querySelector('.snap-filters').style.display = 'none';
+                contactForm.classList.remove('active');
+                jobPost.classList.add('active');
+                applicationForm.classList.remove('active');
+            }
+            
+            function showApplicationForm() {
+                document.getElementById('searchResults').style.display = 'none';
+                document.querySelector('.advanced-search').style.display = 'none';
+                document.querySelector('.salary-filters').style.display = 'none';
+                document.querySelector('.snap-filters').style.display = 'none';
+                contactForm.classList.remove('active');
+                jobPost.classList.remove('active');
+                applicationForm.classList.add('active');
             }
 
             // الاتصال بنا
             contactBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                toggleMainDisplay(false);
+                showMainPage();
                 contactForm.classList.add('active');
             });
             
-            // العودة للنتائج (من نموذج الاتصال أو تفاصيل الوظيفة)
-            backToResults.addEventListener('click', function() {
-                toggleMainDisplay(true);
-            });
+            // العودة للنتائج
+            backToResults.addEventListener('click', showMainPage);
             
-            // عرض تفاصيل الوظيفة
-            jobCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    toggleMainDisplay(false);
-                    jobPost.classList.add('active');
-                });
+            // العودة لصفحة الوظيفة
+            backToJobPost.addEventListener('click', showJobPost);
+            
+            // التقديم على الوظيفة
+            applyJobBtn.addEventListener('click', function() {
+                showApplicationForm();
             });
             
             // عرض تفاصيل الإعلان (Ad Item)
             adItems.forEach(ad => {
                 ad.addEventListener('click', function() {
                     const adId = this.getAttribute('data-ad');
-                    alert(`سيتم فتح تفاصيل الإعلان رقم ${adId}`);
+                    // إنشاء وظيفة عشوائية للإعلان
+                    const randomCategory = Object.keys(allJobs)[Math.floor(Math.random() * Object.keys(allJobs).length)];
+                    const randomJob = allJobs[randomCategory][Math.floor(Math.random() * allJobs[randomCategory].length)];
+                    const randomCompany = companies[Math.floor(Math.random() * companies.length)];
+                    
+                    displayJobDetails(randomJob, randomCompany, randomCategory);
+                    showJobPost();
                 });
             });
             
@@ -1233,35 +1465,36 @@
                 }, 2000);
             });
             
-            // إرسال نموذج الاتصال (محاكاة)
-            contactFormElement.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // تعطيل زر الإرسال
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'جاري الإرسال...';
-                
-                // محاكاة إرسال البيانات
-                setTimeout(() => {
-                    // إظهار رسالة النجاح
-                    formMessage.textContent = 'تم إرسال رسالتك بنجاح! سيتم الرد عليك في أقرب وقت.';
-                    formMessage.className = 'form-message success';
-                    formMessage.style.display = 'block';
-                    
-                    // إعادة تعيين النموذج
-                    contactFormElement.reset();
-                    
-                    // إعادة تمكين زر الإرسال
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'إرسال الرسالة';
-                    
-                    // إخفاء الرسالة بعد 5 ثوانٍ
-                    setTimeout(() => {
-                        formMessage.style.display = 'none';
-                        toggleMainDisplay(true); // العودة للصفحة الرئيسية
-                    }, 5000);
-                }, 2000);
+            // إدارة رفع الملفات
+            fileInput.addEventListener('change', function(e) {
+                const files = e.target.files;
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    uploadedFiles.push(file);
+                    displayFileInList(file);
+                }
+                // إعادة تعيين حقل الملف للسماح برفع نفس الملف مرة أخرى إذا لزم الأمر
+                fileInput.value = '';
             });
+            
+            function displayFileInList(file) {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <button type="button" class="remove-file" data-filename="${file.name}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                fileList.appendChild(fileItem);
+                
+                // إضافة حدث إزالة الملف
+                fileItem.querySelector('.remove-file').addEventListener('click', function() {
+                    const fileName = this.getAttribute('data-filename');
+                    uploadedFiles = uploadedFiles.filter(f => f.name !== fileName);
+                    fileItem.remove();
+                });
+            }
             
             // وظائف المساعدة للتحميل
             function showLoading() {
@@ -1275,7 +1508,7 @@
             }
             
             // وظيفة لعرض وظائف عشوائية
-            function displayRandomJobs(count) {
+            function displayRandomJobs(count, filterType = 'all', filterValue = '') {
                 // مسح النتائج الحالية
                 const existingJobCards = document.querySelectorAll('.job-card');
                 existingJobCards.forEach(card => {
@@ -1289,22 +1522,32 @@
                     const randomCompany = companies[Math.floor(Math.random() * companies.length)];
                     const randomCity = cities[Math.floor(Math.random() * cities.length)];
                     
-                    // تحديد نوع الوظيفة (محاسبة أو أخرى)
-                    let randomJob;
-                    if (Math.random() > 0.5) {
-                        randomJob = accountingJobs[Math.floor(Math.random() * accountingJobs.length)];
+                    // تحديد نوع الوظيفة بناءً على التصفية
+                    let jobCategory, randomJob;
+                    if (filterType === 'technical') {
+                        jobCategory = 'technical';
+                        randomJob = allJobs.technical[Math.floor(Math.random() * allJobs.technical.length)];
+                    } else if (filterType === 'medical') {
+                        jobCategory = 'medical';
+                        randomJob = allJobs.medical[Math.floor(Math.random() * allJobs.medical.length)];
+                    } else if (filterType === 'administrative') {
+                        jobCategory = 'administrative';
+                        randomJob = allJobs.administrative[Math.floor(Math.random() * allJobs.administrative.length)];
                     } else {
-                        randomJob = otherJobs[Math.floor(Math.random() * otherJobs.length)];
+                        // وظيفة عشوائية من أي فئة
+                        const categories = Object.keys(allJobs);
+                        jobCategory = categories[Math.floor(Math.random() * categories.length)];
+                        randomJob = allJobs[jobCategory][Math.floor(Math.random() * allJobs[jobCategory].length)];
                     }
                     
                     const jobCard = document.createElement('div');
                     jobCard.className = 'job-card';
                     jobCard.innerHTML = `
                         <div class="city-badge">${randomCity}</div>
-                        <div class="job-title">${randomJob} في ${randomCompany}</div>
+                        <div class="job-title">${randomJob}</div>
                         <div class="job-company">${randomCompany}</div>
                         <div class="job-meta">
-                            <div>${new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit', hour12: true })}، ${new Date().toLocaleDateString('ar-SA')}</div>
+                            <div>${new Date().toLocaleDateString('ar-SA')}</div>
                             <div class="job-views">
                                 ${Math.floor(Math.random() * 5000)} <div class="views-bar" style="width: ${Math.floor(Math.random() * 100)}%;"></div>
                             </div>
@@ -1313,21 +1556,68 @@
                     
                     // إضافة حدث النقر لعرض تفاصيل الوظيفة
                     jobCard.addEventListener('click', function() {
-                        toggleMainDisplay(false);
-                        jobPost.classList.add('active');
-                        
-                        // تحديث محتوى صفحة الوظيفة
-                        document.querySelector('.job-post-header').textContent = `${randomJob} في ${randomCompany}`;
-                        document.querySelector('.job-company').textContent = randomCompany;
+                        displayJobDetails(randomJob, randomCompany, jobCategory, randomCity);
+                        showJobPost();
                     });
                     
                     searchResults.appendChild(jobCard);
                 }
             }
             
+            // وظيفة لعرض تفاصيل الوظيفة
+            function displayJobDetails(jobTitle, company, category, city = "الرياض") {
+                currentJob = { jobTitle, company, category, city };
+                
+                // تحديث عنوان الوظيفة
+                document.getElementById('jobPostTitle').textContent = jobTitle;
+                
+                // تحديث اسم الشركة
+                document.getElementById('jobPostCompany').textContent = company;
+                
+                // تحديث الوسوم
+                const jobTags = document.getElementById('jobTags');
+                jobTags.innerHTML = `
+                    <div class="tag">#${category}</div>
+                    <div class="tag">#${city}</div>
+                    <div class="tag">#${company.replace(/\s/g, '_')}</div>
+                    <div class="tag">#وظائف_السعودية</div>
+                `;
+                
+                // تحديث محتوى الوظيفة
+                const jobContent = document.getElementById('jobContent');
+                jobContent.innerHTML = `
+                    <div class="section-title">المسميات الوظيفية:</div>
+                    <ul class="bullet-list">
+                        <li>${jobTitle}</li>
+                        <li>${jobTitle} مساعد</li>
+                        <li>${jobTitle} أول</li>
+                    </ul>
+                    
+                    <div class="section-title">نبذة عن الشركة:</div>
+                    <p>${company} هي شركة رائدة في مجالها، تأسست عام ${2000 + Math.floor(Math.random() * 23)} ولها حضور قوي في السوق السعودي. نتميز بتقديم حلول مبتكرة وخدمات متميزة لعملائنا.</p>
+                    
+                    <div class="section-title">متطلبات الوظيفة:</div>
+                    <ul class="bullet-list">
+                        <li>خبرة لا تقل عن ${Math.floor(Math.random() * 5) + 1} سنوات في المجال</li>
+                        <li>إجادة اللغة العربية</li>
+                        <li>القدرة على العمل ضمن فريق</li>
+                        <li>${category === 'technical' ? 'الإلمام بأحدث التقنيات في المجال' : 'المهارات الإدارية والتنظيمية'}</li>
+                    </ul>
+                    
+                    <div class="section-title">مميزات العمل في الشركة:</div>
+                    <ul class="bullet-list">
+                        <li>رواتب تنافسية تبدأ من ${Math.floor(Math.random() * 5000) + 5000} ريال</li>
+                        <li>تأمين طبي شامل</li>
+                        <li>بيئة عمل محفزة</li>
+                        <li>فرص للتطور الوظيفي</li>
+                        <li>تدريب مستمر وتطوير مهارات</li>
+                    </ul>
+                `;
+            }
+            
             // عرض وظائف عشوائية عند التحميل الأولي
-            displayRandomJobs(5);
+            displayRandomJobs(8);
         });
     </script>
 </body>
-                </html>
+    </html>
