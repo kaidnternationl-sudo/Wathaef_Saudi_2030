@@ -1011,6 +1011,52 @@
     </div>
 
     <script>
+        // قاعدة بيانات الشركات السعودية
+        const companies = [
+            "أرامكو السعودية", "سابك", "الاتصالات السعودية", "الراجحي", "مصرف الراجحي",
+            "البنك الأهلي", "الرياض المالية", "سدكو القابضة", "التعاونية", "زين السعودية",
+            "STC", "موبايلي", "الاتحاد للطيران", "ناس", "المجموعة السعودية للأبحاث",
+            "دار الأركان", "المراعي", "صافولا", "نادك", "أسمنت العربية",
+            "أسمنت اليمامة", "الكابلات", "أنابيب", "بترو رابغ", "كيمانول",
+            "المتقدمة", "أكوا باور", "أكواباور", "العقارية", "تعمير",
+            "إعمار", "إعمار المدينة الاقتصادية", "إعمار مولز", "إعمار للتطوير", "إعمار للضيافة",
+            "دلة الصحية", "المستشفى السعودي الألماني", "مستشفى الملك فيصل التخصصي", "مستشفى القوات المسلحة", "مستشفى الدكتور سليمان الحبيب",
+            "مجموعة صافولا", "مجموعة المراعي", "مجموعة بن داود", "مجموعة العليان", "مجموعة الفوزان",
+            "مجموعة عبد اللطيف جميل", "مجموعة الحكير", "مجموعة إبراهيم الجفالي", "مجموعة دلة", "مجموعة المؤسسة العربية",
+            "شركة المياه الوطنية", "شركة الكهرباء السعودية", "شركة الخطوط السعودية", "شركة النقل الجماعي", "شركة مطارات الرياض"
+        ];
+
+        // وظائف المحاسبة المختلفة
+        const accountingJobs = [
+            "محاسب", "محاسب قانوني", "محاسب تكاليف", "محاسب ضرائب", "محاسب رواتب",
+            "محاسب بنوك", "محاسب استثمار", "محاسب مالي", "محاسب إداري", "محاسب مشتريات",
+            "محاسب مبيعات", "محاسب مخازن", "محاسب مقاولات", "محاسب عقارات", "محاسب مستشفيات",
+            "محاسب فنادق", "محاسب مدارس", "محاسب جامعات", "محاسب شركات", "محاسب مؤسسات",
+            "محاسب حكومي", "محاسب بلديات", "محاسب وزارات", "محاسب هيئات", "محاسب جمعيات",
+            "محاسب تعاونيات", "محاسب شراكات", "محاسب أفراد", "محاسب شركات صغيرة", "محاسب شركات متوسطة",
+            "محاسب شركات كبيرة", "محاسب متدرب", "محاسب مبتدئ", "محاسب متوسط", "محاسب كبير",
+            "محاسب أول", "محاسب رئيسي", "مدير حسابات", "رئيس قسم المحاسبة", "مراجع حسابات"
+        ];
+
+        // وظائف متنوعة في مجالات أخرى
+        const otherJobs = [
+            "مدير مبيعات", "مندوب مبيعات", "مسوق إلكتروني", "مصمم جرافيك", "مطور ويب",
+            "مبرمج", "مهندس برمجيات", "مهندس شبكات", "مهندس اتصالات", "مهندس مدني",
+            "مهندس معماري", "مهندس ميكانيكي", "مهندس كهرباء", "فني صيانة", "سكرتير",
+            "مسؤول موارد بشرية", "مدير مشاريع", "محلل أعمال", "مستشار مالي", "مدير تسويق",
+            "محرر محتوى", "كاتب إعلانات", "مترجم", "مدقق لغوي", "باحث",
+            "أخصائي اجتماعي", "معلم", "مدرب", "طبيب", "ممرض",
+            "صيدلي", "محامي", "مهندس صناعي", "فني مختبر", "سائق"
+        ];
+
+        // المدن السعودية
+        const cities = [
+            "الرياض", "جدة", "مكة", "المدينة", "الدمام",
+            "الخبر", "الأحساء", "الطائف", "بريدة", "تبوك",
+            "جازان", "نجران", "حائل", "الباحة", "عرعر",
+            "سكاكا", "أبها", "القصيم", "الشرقية", "عسير"
+        ];
+
         // كود JavaScript كامل للوظائف
         document.addEventListener('DOMContentLoaded', function() {
             // عناصر DOM
@@ -1034,6 +1080,7 @@
             const postDateElement = document.getElementById('postDate');
             const adItems = document.querySelectorAll('.ad-item');
             const jobCards = document.querySelectorAll('.job-card');
+            const searchResults = document.getElementById('searchResults');
             
             // تحديث الوقت الحالي
             function updateCurrentTime() {
@@ -1063,8 +1110,9 @@
                 showLoading();
                 setTimeout(() => {
                     hideLoading();
-                    resultsCount.textContent = `${Math.floor(Math.random() * 30) + 5} نتيجة`;
-                    // في التطبيق الحقيقي، هنا سيتم تطبيق التصفية الفعلية
+                    const jobCount = Math.floor(Math.random() * 30) + 5;
+                    resultsCount.textContent = `${jobCount} نتيجة`;
+                    displayRandomJobs(jobCount);
                 }, 1000);
             }
 
@@ -1122,8 +1170,9 @@
                     showLoading();
                     setTimeout(() => {
                         hideLoading();
-                        resultsCount.textContent = `${Math.floor(Math.random() * 50) + 1} نتيجة`;
-                        // في التطبيق الحقيقي، هنا سيتم جلب النتائج من الخادم
+                        const jobCount = Math.floor(Math.random() * 50) + 1;
+                        resultsCount.textContent = `${jobCount} نتيجة`;
+                        displayRandomJobs(jobCount);
                     }, 1500);
                 }
             }
@@ -1177,7 +1226,9 @@
                 setTimeout(() => {
                     hideLoading();
                     updateCurrentTime();
-                    resultsCount.textContent = `${Math.floor(Math.random() * 50) + 1} نتيجة`;
+                    const jobCount = Math.floor(Math.random() * 50) + 1;
+                    resultsCount.textContent = `${jobCount} نتيجة`;
+                    displayRandomJobs(jobCount);
                     alert('تم تحديث الوظائف بنجاح!');
                 }, 2000);
             });
@@ -1222,7 +1273,61 @@
                 loadingIndicator.classList.remove('active');
                 document.getElementById('searchResults').style.opacity = '1';
             }
+            
+            // وظيفة لعرض وظائف عشوائية
+            function displayRandomJobs(count) {
+                // مسح النتائج الحالية
+                const existingJobCards = document.querySelectorAll('.job-card');
+                existingJobCards.forEach(card => {
+                    if (!card.hasAttribute('data-job')) {
+                        card.remove();
+                    }
+                });
+                
+                // إضافة وظائف عشوائية
+                for (let i = 0; i < count; i++) {
+                    const randomCompany = companies[Math.floor(Math.random() * companies.length)];
+                    const randomCity = cities[Math.floor(Math.random() * cities.length)];
+                    
+                    // تحديد نوع الوظيفة (محاسبة أو أخرى)
+                    let randomJob;
+                    if (Math.random() > 0.5) {
+                        randomJob = accountingJobs[Math.floor(Math.random() * accountingJobs.length)];
+                    } else {
+                        randomJob = otherJobs[Math.floor(Math.random() * otherJobs.length)];
+                    }
+                    
+                    const jobCard = document.createElement('div');
+                    jobCard.className = 'job-card';
+                    jobCard.innerHTML = `
+                        <div class="city-badge">${randomCity}</div>
+                        <div class="job-title">${randomJob} في ${randomCompany}</div>
+                        <div class="job-company">${randomCompany}</div>
+                        <div class="job-meta">
+                            <div>${new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit', hour12: true })}، ${new Date().toLocaleDateString('ar-SA')}</div>
+                            <div class="job-views">
+                                ${Math.floor(Math.random() * 5000)} <div class="views-bar" style="width: ${Math.floor(Math.random() * 100)}%;"></div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // إضافة حدث النقر لعرض تفاصيل الوظيفة
+                    jobCard.addEventListener('click', function() {
+                        toggleMainDisplay(false);
+                        jobPost.classList.add('active');
+                        
+                        // تحديث محتوى صفحة الوظيفة
+                        document.querySelector('.job-post-header').textContent = `${randomJob} في ${randomCompany}`;
+                        document.querySelector('.job-company').textContent = randomCompany;
+                    });
+                    
+                    searchResults.appendChild(jobCard);
+                }
+            }
+            
+            // عرض وظائف عشوائية عند التحميل الأولي
+            displayRandomJobs(5);
         });
     </script>
 </body>
-</html>
+                </html>
