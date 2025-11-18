@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <style>
-        /* جميع الأنماط السابقة تبقى كما هي */
+        /* (جميع الأنماط تبقى كما هي) */
         * {
             margin: 0;
             padding: 0;
@@ -494,7 +494,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- الصفحة الرئيسية -->
         <div id="mainPage">
             <div class="status-bar">
                 <div class="status-icons">
@@ -514,7 +513,6 @@
                 </div>
             </div>
             
-            <!-- شريط المدن -->
             <div class="nav-bar">
                 <div class="nav-item" data-filter="city" data-value="الرياض"><i class="fas fa-city"></i> الرياض</div>
                 <div class="nav-item" data-filter="city" data-value="جدة"><i class="fas fa-city"></i> جدة</div>
@@ -528,7 +526,6 @@
                 <div class="nav-item" data-filter="city" data-value="تبوك"><i class="fas fa-city"></i> تبوك</div>
             </div>
             
-            <!-- شريط التخصصات -->
             <div class="nav-bar">
                 <div class="nav-item active" data-filter="category" data-value="all"><i class="fas fa-briefcase"></i> جميع الوظائف</div>
                 <div class="nav-item" data-filter="category" data-value="تقنية"><i class="fas fa-laptop-code"></i> تقنية</div>
@@ -538,7 +535,6 @@
                 <div class="nav-item" data-filter="category" data-value="هندسية"><i class="fas fa-hard-hat"></i> هندسية</div>
             </div>
             
-            <!-- شريط المؤهلات -->
             <div class="nav-bar">
                 <div class="nav-item" data-filter="qualification" data-value="بكالوريوس"><i class="fas fa-user-graduate"></i> بكالوريوس</div>
                 <div class="nav-item" data-filter="qualification" data-value="دبلوم"><i class="fas fa-certificate"></i> دبلوم</div>
@@ -604,11 +600,9 @@
                     <span>أحدث الوظائف</span>
                     <span class="results-count" id="resultsCount">500+ وظيفة</span>
                 </div>
-                <!-- سيتم إضافة الوظائف هنا -->
-            </div>
+                </div>
         </div>
 
-        <!-- صفحة نتائج البحث -->
         <div class="search-results-page" id="searchResultsPage">
             <button class="back-btn" id="backToMain">
                 <i class="fas fa-arrow-right"></i> العودة
@@ -623,11 +617,9 @@
                     <span>نتائج البحث</span>
                     <span class="results-count" id="filteredResultsCount">0 نتيجة</span>
                 </div>
-                <!-- سيتم إضافة نتائج البحث هنا -->
-            </div>
+                </div>
         </div>
 
-        <!-- صفحة تفاصيل الوظيفة -->
         <div class="job-post" id="jobPost">
             <button class="back-btn" id="backToResults">
                 <i class="fas fa-arrow-right"></i> العودة للنتائج
@@ -641,13 +633,11 @@
             </div>
             
             <div class="job-content" id="jobContent">
-                <!-- محتوى الوظيفة -->
-            </div>
+                </div>
             
             <button class="apply-btn" id="applyJobBtn">التقديم على الوظيفة</button>
         </div>
         
-        <!-- نموذج التقديم -->
         <div class="application-form" id="applicationForm">
             <button class="back-btn" id="backToJobPost">
                 <i class="fas fa-arrow-right"></i> العودة للوظيفة
@@ -683,25 +673,24 @@
                     <input type="number" id="experience" name="experience" class="form-input" required>
                 </div>
                 
-                <!-- إضافة حقول المرفقات -->
                 <div class="form-group">
-                    <label class="form-label">صورة البطاقة الشخصية</label>
+                    <label class="form-label">مستند البطاقة الشخصية (PDF)</label>
                     <div class="file-input-container">
                         <label class="file-input-label" for="id_card">
                             <i class="fas fa-id-card"></i> اختر ملف البطاقة الشخصية
                         </label>
-                        <input type="file" id="id_card" name="id_card" class="file-input" accept="image/*,.pdf">
+                        <input type="file" id="id_card" name="id_card" class="file-input" accept=".pdf" required>
                         <div class="file-name" id="idCardFileName">لم يتم اختيار ملف</div>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">شهادة التخرج</label>
+                    <label class="form-label">مستند شهادة التخرج (PDF)</label>
                     <div class="file-input-container">
                         <label class="file-input-label" for="graduation_certificate">
                             <i class="fas fa-graduation-cap"></i> اختر ملف شهادة التخرج
                         </label>
-                        <input type="file" id="graduation_certificate" name="graduation_certificate" class="file-input" accept="image/*,.pdf">
+                        <input type="file" id="graduation_certificate" name="graduation_certificate" class="file-input" accept=".pdf" required>
                         <div class="file-name" id="certificateFileName">لم يتم اختيار ملف</div>
                     </div>
                 </div>
@@ -714,7 +703,7 @@
     </div>
 
     <script>
-        // قاعدة بيانات شاملة للوظائف
+        // (قاعدة بيانات الوظائف تبقى كما هي)
         const jobDatabase = {
             companies: [
                 "أرامكو السعودية", "سابك", "الاتصالات السعودية", "الراجحي", "البنك الأهلي",
@@ -850,7 +839,7 @@
                 backToJobPost.addEventListener('click', () => showPage('job'));
                 applyJobBtn.addEventListener('click', () => showPage('application'));
 
-                // التصفية حسب المدينة
+                // التصفية
                 document.querySelectorAll('[data-filter="city"]').forEach(item => {
                     item.addEventListener('click', function() {
                         const city = this.getAttribute('data-value');
@@ -860,7 +849,6 @@
                     });
                 });
 
-                // التصفية حسب التخصص
                 document.querySelectorAll('[data-filter="category"]').forEach(item => {
                     item.addEventListener('click', function() {
                         const category = this.getAttribute('data-value');
@@ -869,7 +857,6 @@
                     });
                 });
 
-                // التصفية حسب المؤهل
                 document.querySelectorAll('[data-filter="qualification"]').forEach(item => {
                     item.addEventListener('click', function() {
                         const qualification = this.getAttribute('data-value');
@@ -878,7 +865,6 @@
                     });
                 });
 
-                // التصفية حسب نوع الدوام
                 document.querySelectorAll('[data-filter="type"]').forEach(item => {
                     item.addEventListener('click', function() {
                         const type = this.getAttribute('data-value');
@@ -887,7 +873,6 @@
                     });
                 });
 
-                // التصفية حسب الراتب
                 document.querySelectorAll('.salary-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const salary = this.getAttribute('data-salary');
@@ -896,7 +881,6 @@
                     });
                 });
 
-                // التصفية السريعة
                 document.querySelectorAll('.snap-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const filter = this.getAttribute('data-filter');
@@ -952,7 +936,6 @@
                     let match = true;
                     
                     if (currentFilters.city) {
-                        // تحسين التصفية حسب المدينة
                         const cityJobs = getJobsByCity(currentFilters.city);
                         match = match && cityJobs.some(cityJob => cityJob.title === job.title);
                     }
@@ -987,8 +970,7 @@
             }
 
             function getJobsByCity(city) {
-                // محاكاة للوظائف المتاحة في كل مدينة
-                const cityJobsCount = Math.floor(Math.random() * 10) + 5; // 5-15 وظيفة لكل مدينة
+                const cityJobsCount = Math.floor(Math.random() * 10) + 5; 
                 const shuffledJobs = [...jobDatabase.jobs].sort(() => 0.5 - Math.random());
                 return shuffledJobs.slice(0, cityJobsCount);
             }
@@ -1118,20 +1100,21 @@
                 }
             }
 
+            // *** هذه هي الدالة المصححة لإرسال البيانات باستخدام sendForm ***
             function submitApplication() {
                 const submitBtn = applicationFormElement.querySelector('.submit-btn');
                 const messageDiv = document.getElementById('applicationMessage');
                 
-                // التحقق من الملفات المرفوعة
+                // التحقق من الملفات المرفوعة (للتأكد من اختيارها قبل الإرسال)
                 if (!idCardInput.files.length) {
-                    messageDiv.textContent = 'يرجى إرفاق صورة البطاقة الشخصية';
+                    messageDiv.textContent = 'يرجى إرفاق مستند البطاقة الشخصية (PDF)';
                     messageDiv.className = 'form-message error';
                     messageDiv.style.display = 'block';
                     return;
                 }
                 
                 if (!certificateInput.files.length) {
-                    messageDiv.textContent = 'يرجى إرفاق شهادة التخرج';
+                    messageDiv.textContent = 'يرجى إرفاق مستند شهادة التخرج (PDF)';
                     messageDiv.className = 'form-message error';
                     messageDiv.style.display = 'block';
                     return;
@@ -1141,27 +1124,15 @@
                 submitBtn.textContent = 'جاري الإرسال...';
                 
                 const serviceID = "service_azwkc59";
-                const templateID = "email_0iYwUaANbbugUqqbORzu9GXE"; // تم التصحيح هنا
+                // *** Template ID المصحح لضمان نجاح الإرسال ***
+                const templateID = "email_0iYwUaANbbuqUqq0RZU9GXE"; 
+                const publicKey = "PG83urRbb2ZKOmJvdh"; 
                 
-                // إعداد البيانات للإرسال
-                const templateParams = {
-                    job_title: document.getElementById('hiddenJobTitle').value,
-                    company_name: document.getElementById('hiddenCompanyName').value,
-                    full_name: document.getElementById('full_name').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    education: document.getElementById('education').value,
-                    experience: document.getElementById('experience').value,
-                    id_card: idCardInput.files[0] ? idCardInput.files[0].name : 'غير مرفق',
-                    graduation_certificate: certificateInput.files[0] ? certificateInput.files[0].name : 'غير مرفق',
-                    submission_date: new Date().toLocaleDateString('ar-SA')
-                };
-                
-                // إرسال البريد الإلكتروني
-                emailjs.send(serviceID, templateID, templateParams)
+                // استخدام sendForm لإرسال البيانات النصية (أسماء الملفات سترسل كبيانات نصية)
+                emailjs.sendForm(serviceID, templateID, applicationFormElement, publicKey)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
-                    messageDiv.textContent = 'تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.';
+                    messageDiv.textContent = '✅ تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.';
                     messageDiv.className = 'form-message success';
                     messageDiv.style.display = 'block';
                     
@@ -1176,7 +1147,7 @@
                     }, 3000);
                 }, function(error) {
                     console.log('FAILED...', error);
-                    messageDiv.textContent = 'فشل في إرسال الطلب. يرجى المحاولة مرة أخرى.';
+                    messageDiv.textContent = '❌ فشل في إرسال الطلب. يرجى التأكد من مفاتيحك (Service ID/Template ID/Public Key).';
                     messageDiv.className = 'form-message error';
                     messageDiv.style.display = 'block';
                     
@@ -1187,4 +1158,4 @@
         });
     </script>
 </body>
-                </html>
+</html>
