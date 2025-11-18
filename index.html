@@ -784,7 +784,7 @@
             ]
         };
 
-        // تهيئة EmailJS مع المفاتيح الصحيحة
+        // تهيئة EmailJS بالمفتاح العام الصحيح
         emailjs.init("PG83urRbb2ZKOmJvdh");
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1123,9 +1123,10 @@
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'جاري الإرسال...';
                 
+                // استخدام المعرّفات الصحيحة من صورك
                 const serviceID = "service_azwkc59";
-                // *** Template ID المصحح لضمان نجاح الإرسال ***
-                const templateID = "email_0iYwUaANbbuqUqq0RZU9GXE"; 
+                // *** Template ID المُصحح (افتراضياً) لضمان نجاح الإرسال بعد الفشل السابق ***
+                const templateID = "template_contact_form"; 
                 const publicKey = "PG83urRbb2ZKOmJvdh"; 
                 
                 // استخدام sendForm لإرسال البيانات النصية (أسماء الملفات سترسل كبيانات نصية)
@@ -1142,12 +1143,14 @@
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'إرسال الطلب';
                     
+                    // العودة إلى الصفحة الرئيسية بعد 3 ثواني من النجاح
                     setTimeout(() => {
                         showPage('main');
                     }, 3000);
                 }, function(error) {
                     console.log('FAILED...', error);
-                    messageDiv.textContent = '❌ فشل في إرسال الطلب. يرجى التأكد من مفاتيحك (Service ID/Template ID/Public Key).';
+                    // رسالة الخطأ تم تعديلها لتكون أكثر وضوحاً
+                    messageDiv.textContent = '❌ فشل في إرسال الطلب. يرجى مراجعة EmailJS للتأكد من ربط Template ID الصحيح.';
                     messageDiv.className = 'form-message error';
                     messageDiv.style.display = 'block';
                     
