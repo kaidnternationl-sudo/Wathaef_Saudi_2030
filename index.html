@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <style>
+        /* جميع الأنماط السابقة تبقى كما هي */
         * {
             margin: 0;
             padding: 0;
@@ -794,7 +795,7 @@
             ]
         };
 
-        // تهيئة EmailJS
+        // تهيئة EmailJS مع المفاتيح الصحيحة
         emailjs.init("PG83urRbb2ZKOmJvdh");
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1140,13 +1141,10 @@
                 submitBtn.textContent = 'جاري الإرسال...';
                 
                 const serviceID = "service_azwkc59";
-                const templateID = "email_0iYwUaANbbuqUqq0RZU9GXE";
+                const templateID = "email_0iYwUaANbbugUqqbORzu9GXE"; // تم التصحيح هنا
                 
                 // إعداد البيانات للإرسال
-                const formData = new FormData(applicationFormElement);
-                
-                // إرسال البريد الإلكتروني
-                emailjs.send(serviceID, templateID, {
+                const templateParams = {
                     job_title: document.getElementById('hiddenJobTitle').value,
                     company_name: document.getElementById('hiddenCompanyName').value,
                     full_name: document.getElementById('full_name').value,
@@ -1154,10 +1152,15 @@
                     phone: document.getElementById('phone').value,
                     education: document.getElementById('education').value,
                     experience: document.getElementById('experience').value,
-                    id_card: 'مرفق',
-                    graduation_certificate: 'مرفق'
-                })
+                    id_card: idCardInput.files[0] ? idCardInput.files[0].name : 'غير مرفق',
+                    graduation_certificate: certificateInput.files[0] ? certificateInput.files[0].name : 'غير مرفق',
+                    submission_date: new Date().toLocaleDateString('ar-SA')
+                };
+                
+                // إرسال البريد الإلكتروني
+                emailjs.send(serviceID, templateID, templateParams)
                 .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
                     messageDiv.textContent = 'تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.';
                     messageDiv.className = 'form-message success';
                     messageDiv.style.display = 'block';
@@ -1172,6 +1175,7 @@
                         showPage('main');
                     }, 3000);
                 }, function(error) {
+                    console.log('FAILED...', error);
                     messageDiv.textContent = 'فشل في إرسال الطلب. يرجى المحاولة مرة أخرى.';
                     messageDiv.className = 'form-message error';
                     messageDiv.style.display = 'block';
@@ -1183,4 +1187,4 @@
         });
     </script>
 </body>
-                    </html>
+                </html>
